@@ -10,25 +10,15 @@ namespace EncryptingAndDecrypting
     {
         public static string Encrypt(string text, string key)
         {
-            string alphabet = "abcdefghijklmnopqrstuvwxyz";
-            alphabet += alphabet.ToUpperInvariant();
-            string reversealphabet = new string(alphabet.Reverse().ToArray());
-
-            var encryptedBuilder = new StringBuilder();
+            string result = "";
 
             int keyCount = 0;
             foreach (var letter in text)
             {
                 char letterOfKey = key[keyCount];
 
-                int indexOf = text.IndexOf(letter);
+                result += (char)(letter + letterOfKey);
 
-
-                int index = letter + indexOf;
-                index += letterOfKey;
-                
-                index -= reversealphabet.IndexOf(letterOfKey);
-                encryptedBuilder.Append((char)index);
 
                 if ((keyCount + 1) < (key.Length - 1))
                 {
@@ -40,31 +30,20 @@ namespace EncryptingAndDecrypting
                 }
             }
 
-            return encryptedBuilder.ToString();
+            return result;
         }
 
         public static string Decrypt(string text, string key)
         {
-            string alphabet = "abcdefghijklmnopqrstuvwxyz";
-            alphabet += alphabet.ToUpperInvariant();
-            string reversealphabet = new string(alphabet.Reverse().ToArray());
-
-            var decryptedBuilder = new StringBuilder();
+            string result = "";
 
             int keyCount = 0;
             foreach (var letter in text)
             {
                 char letterOfKey = key[keyCount];
 
-                int indexOf = text.IndexOf(letter);
+                result += (char)(letter - letterOfKey);
 
-
-                int index = letter + indexOf;
-                index -= letterOfKey;
-
-                index -= reversealphabet.IndexOf(letterOfKey);
-                Console.WriteLine(index);
-                decryptedBuilder.Append((char)index);
 
                 if ((keyCount + 1) < (key.Length - 1))
                 {
@@ -76,7 +55,7 @@ namespace EncryptingAndDecrypting
                 }
             }
 
-            return decryptedBuilder.ToString();
+            return result;
         }
     }
 }
