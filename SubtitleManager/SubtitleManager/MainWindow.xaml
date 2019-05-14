@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <TextBox HorizontalAlignment="Left" Height="92" Margin="10,10,0,0" TextWrapping="Wrap" Text="Subtitles..." VerticalAlignment="Top" Width="343"/>
+        <Button Content="Next" HorizontalAlignment="Left" Margin="358,10,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Previous" HorizontalAlignment="Left" Margin="358,35,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Browse" HorizontalAlignment="Left" Margin="358,82,0,0" VerticalAlignment="Top" Width="75" Click="BrowseSubs"/>
     </Grid>
 </Window>

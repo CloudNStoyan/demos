@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Microsoft.Win32;
 
 namespace SubtitleManager
 {
@@ -20,9 +10,26 @@ namespace SubtitleManager
     /// </summary>
     public partial class MainWindow : Window
     {
+        private string FileData { get; set; }
+
         public MainWindow()
         {
-            InitializeComponent();
+            this.InitializeComponent();
+        }
+
+        private void BrowseSubs(object sender, EventArgs e)
+        {
+            var dialog = new OpenFileDialog
+            {
+                DefaultExt = ".srt",
+                Filter = "Subtitle Files (*.srt)|*.srt"
+            };
+
+            if (dialog.ShowDialog() == true)
+            {
+                string filePath = dialog.FileName;
+                this.FileData = File.ReadAllText(filePath);
+            }
         }
     }
 }
