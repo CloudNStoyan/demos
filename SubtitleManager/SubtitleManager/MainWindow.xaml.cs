@@ -30,6 +30,8 @@ namespace SubtitleManager
                 string filePath = dialog.FileName;
                 this.FileData = File.ReadAllText(filePath);
             }
+	    string[] subs = this.FileData.split('\n').Select(x => x).Where(x  => !string.isNullOrWhitespace(x));
         }
+
     }
 }
