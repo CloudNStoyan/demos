@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using Microsoft.Win32;
 
@@ -11,6 +12,8 @@ namespace SubtitleManager
     public partial class MainWindow : Window
     {
         private string FileData { get; set; }
+        private string[] Subs { get; set; }
+        private int CurrentSub { get; set; }
 
         public MainWindow()
         {
@@ -30,8 +33,14 @@ namespace SubtitleManager
                 string filePath = dialog.FileName;
                 this.FileData = File.ReadAllText(filePath);
             }
-	    string[] subs = this.FileData.split('\n').Select(x => x).Where(x  => !string.isNullOrWhitespace(x));
+
+	        this.Subs = this.FileData.Split('\n').Where(x  => !string.IsNullOrWhiteSpace(x)).Select(x => x).ToArray();
         }
 
+        private void NextSub(object s, EventArgs e)
+        {
+            this.SubtitleArea.Text = this.Subs[this.CurrentSub];
+            this.CurrentSub++;
+        }
     }
 }
