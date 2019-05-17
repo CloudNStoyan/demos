@@ -42,5 +42,11 @@ namespace SubtitleManager
             this.SubtitleArea.Text = this.Subs[this.CurrentSub];
             this.CurrentSub++;
         }
+
+        private void PreviousSub(object s, EventArgs e)
+        {
+            this.SubtitleArea.Text = this.Subs[this.CurrentSub];
+            this.CurrentSub--;
+        }
     }
 }
