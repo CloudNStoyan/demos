@@ -34,7 +34,7 @@ namespace SubtitleManager
                 this.FileData = File.ReadAllText(filePath);
             }
 
-	        this.Subs = this.FileData.Split('\n').Where(x  => !string.IsNullOrWhiteSpace(x)).Select(x => x).ToArray();
+	        this.Subs = this.FileData.Split('\n').ToArray();
         }
 
         private void NextSub(object s, EventArgs e)
@@ -47,6 +47,11 @@ namespace SubtitleManager
         {
             this.SubtitleArea.Text = this.Subs[this.CurrentSub];
             this.CurrentSub--;
+        }
+
+        private void EditSub(object s, EventArgs e)
+        {
+           // this.Subs[this.CurrentSub] = this.SubtitleArea.Text;
         }
     }
 }
