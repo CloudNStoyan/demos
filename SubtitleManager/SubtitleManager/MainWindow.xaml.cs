@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -52,6 +53,40 @@ namespace SubtitleManager
         private void EditSub(object s, EventArgs e)
         {
            // this.Subs[this.CurrentSub] = this.SubtitleArea.Text;
+        }
+
+        private Srt[] ParseSrt(string[] srtTextLines)
+        {
+            var list = new List<string[]>();
+
+            var tempList = new List<string>();
+
+            foreach (var line in srtTextLines)
+            {
+                if (!string.IsNullOrWhiteSpace(line))
+                {
+                    tempList.Add(line);
+                }
+                else
+                {
+                    list.Add(tempList.ToArray());
+                    tempList = new List<string>();
+                }
+            }
+
+            var srtList = new List<Srt>();
+
+            foreach (string[] srtTemplate in list)
+            {
+                srtList.Add(new Srt()
+                {
+                    Order = int.Parse(srtTemplate[0]),
+                    Timeline = srtTemplate[1],
+                    Text = srtTemplate[2]
+                });
+            }
+
+            return srtList.ToArray();
         }
     }
 }
