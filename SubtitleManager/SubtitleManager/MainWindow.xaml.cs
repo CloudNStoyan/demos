@@ -13,7 +13,7 @@ namespace SubtitleManager
     public partial class MainWindow : Window
     {
         private string FileData { get; set; }
-        private string[] Subs { get; set; }
+        private Srt[] Subs { get; set; }
         private int CurrentSub { get; set; }
 
         public MainWindow()
@@ -35,18 +35,18 @@ namespace SubtitleManager
                 this.FileData = File.ReadAllText(filePath);
             }
 
-	        this.Subs = this.FileData.Split('\n').ToArray();
+	        this.Subs = this.ParseSrt(this.FileData.Split('\n'));
         }
 
         private void NextSub(object s, EventArgs e)
         {
-            this.SubtitleArea.Text = this.Subs[this.CurrentSub];
+            this.SubtitleArea.Text = this.Subs[this.CurrentSub].Text;
             this.CurrentSub++;
         }
 
         private void PreviousSub(object s, EventArgs e)
         {
-            this.SubtitleArea.Text = this.Subs[this.CurrentSub];
+            this.SubtitleArea.Text = this.Subs[this.CurrentSub].Text;
             this.CurrentSub--;
         }
 
