@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Windows;
 using Microsoft.Win32;
 
@@ -32,7 +33,7 @@ namespace SubtitleManager
             if (dialog.ShowDialog() == true)
             {
                 string filePath = dialog.FileName;
-                this.FileData = File.ReadAllText(filePath);
+                this.FileData = File.ReadAllText(filePath, Encoding.Default);
             }
 
 	        this.Subs = this.ParseSrt(this.FileData.Split('\n'));
@@ -52,7 +53,10 @@ namespace SubtitleManager
 
         private void EditSub(object s, EventArgs e)
         {
-           // this.Subs[this.CurrentSub] = this.SubtitleArea.Text;
+            if (this.Subs != null && this.Subs.Length > 0)
+            {
+                this.Subs[this.CurrentSub].Text = this.SubtitleArea.Text;
+            }
         }
 
         private Srt[] ParseSrt(string[] srtTextLines)
@@ -78,12 +82,15 @@ namespace SubtitleManager
 
             foreach (string[] srtTemplate in list)
             {
-                srtList.Add(new Srt()
+                if (srtTemplate.Length > 2)
                 {
-                    Order = int.Parse(srtTemplate[0]),
-                    Timeline = srtTemplate[1],
-                    Text = srtTemplate[2]
-                });
+                    srtList.Add(new Srt()
+                    {
+                        Order = int.Parse(srtTemplate[0]),
+                        Timeline = srtTemplate[1],
+                        Text = srtTemplate[2]
+                    });
+                }
             }
 
             return srtList.ToArray();
