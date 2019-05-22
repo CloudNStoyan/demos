@@ -56,6 +56,7 @@ namespace SubtitleManager
             if (this.Subs != null && this.Subs.Length > 0)
             {
                 this.Subs[this.CurrentSub].Text = this.SubtitleArea.Text;
+                File.WriteAllLines("./temp.srt", this.Subs.Select(x => x.Order + "\r\n" + x.Text + "\r\n" + x.Timeline).ToArray());
             }
         }
 
