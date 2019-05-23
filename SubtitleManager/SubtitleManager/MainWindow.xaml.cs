@@ -16,6 +16,7 @@ namespace SubtitleManager
         private string FileData { get; set; }
         private Srt[] Subs { get; set; }
         private int CurrentSub { get; set; }
+        private string CurrentSubPath { get; set; }
 
         public MainWindow()
         {
@@ -34,6 +35,7 @@ namespace SubtitleManager
             {
                 string filePath = dialog.FileName;
                 this.FileData = File.ReadAllText(filePath, Encoding.Default);
+                this.CurrentSubPath = filePath;
             }
 
 	        this.Subs = this.ParseSrt(this.FileData.Split('\n'));
@@ -58,6 +60,13 @@ namespace SubtitleManager
                 this.Subs[this.CurrentSub].Text = this.SubtitleArea.Text;
                 File.WriteAllLines("./temp.srt", this.Subs.Select(x => x.Order + "\r\n" + x.Text + "\r\n" + x.Timeline).ToArray());
             }
+        }
+
+        private void SaveSubs(object s, EventArgs e)
+        {
+            string subs = string.Join("\r\n",
+                this.Subs.Select(x => x.Order + "\r\n" + x.Text + "\r\n" + x.Timeline).ToArray());
+            File.WriteAllText(this.CurrentSubPath, subs);
         }
 
         private Srt[] ParseSrt(string[] srtTextLines)

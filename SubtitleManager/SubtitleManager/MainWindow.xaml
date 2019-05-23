@@ -11,5 +11,6 @@
         <Button Content="Next" HorizontalAlignment="Left" Margin="358,10,0,0" VerticalAlignment="Top" Width="75" Click="NextSub"/>
         <Button Content="Previous" HorizontalAlignment="Left" Margin="358,35,0,0" VerticalAlignment="Top" Width="75" Click="PreviousSub"/>
         <Button Content="Browse" HorizontalAlignment="Left" Margin="358,82,0,0" VerticalAlignment="Top" Width="75" Click="BrowseSubs"/>
+        <Button Content="Save" HorizontalAlignment="Left" Margin="10,107,0,0" VerticalAlignment="Top" Width="75" Click="SaveSubs"/>
     </Grid>
 </Window>
