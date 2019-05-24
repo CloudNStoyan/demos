@@ -21,6 +21,11 @@ namespace SubtitleManager
         public MainWindow()
         {
             this.InitializeComponent();
+            if (File.Exists("./temp.txt"))
+            {
+                this.FileData = File.ReadAllText("./temp.txt", Encoding.Default);
+                this.Subs = this.ParseSrt(this.FileData.Split('\n'));
+            }
         }
 
         private void BrowseSubs(object sender, EventArgs e)
