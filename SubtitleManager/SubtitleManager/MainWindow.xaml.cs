@@ -25,6 +25,7 @@ namespace SubtitleManager
             {
                 this.FileData = File.ReadAllText("./temp.txt", Encoding.Default);
                 this.Subs = this.ParseSrt(this.FileData.Split('\n'));
+                MessageBox.Show("Loaded subs from last use.");
             }
         }
 
@@ -72,6 +73,8 @@ namespace SubtitleManager
             string subs = string.Join("\r\n",
                 this.Subs.Select(x => x.Order + "\r\n" + x.Text + "\r\n" + x.Timeline).ToArray());
             File.WriteAllText(this.CurrentSubPath, subs);
+            File.Delete("./temp.txt");
+            MessageBox.Show("Subs are saved to:" + this.CurrentSubPath);
         }
 
         private Srt[] ParseSrt(string[] srtTextLines)
