@@ -40,7 +40,7 @@ namespace SubtitleManager
             if (dialog.ShowDialog() == true)
             {
                 string filePath = dialog.FileName;
-                this.FileData = File.ReadAllText(filePath, Encoding.Default);
+                this.FileData = this.ReadFileText(filePath);
                 this.CurrentSubPath = filePath;
             }
 
@@ -112,6 +112,20 @@ namespace SubtitleManager
             }
 
             return srtList.ToArray();
+        }
+
+        private string ReadFileText(string path)
+        {
+            try
+            {
+                return File.ReadAllText(path, Encoding.Default);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+            return "";
         }
     }
 }
