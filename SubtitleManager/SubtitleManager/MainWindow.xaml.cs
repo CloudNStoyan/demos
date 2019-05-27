@@ -102,12 +102,7 @@ namespace SubtitleManager
             {
                 if (srtTemplate.Length > 2)
                 {
-                    srtList.Add(new Srt()
-                    {
-                        Order = int.Parse(srtTemplate[0]),
-                        Timeline = srtTemplate[1],
-                        Text = srtTemplate[2]
-                    });
+                    srtList.Add(Srt.Parse(srtTemplate));
                 }
             }
 
