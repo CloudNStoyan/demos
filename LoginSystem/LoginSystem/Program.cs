@@ -31,8 +31,10 @@ namespace LoginSystem
         {
             byte[] data = Encoding.ASCII.GetBytes(text);
 
-            var shaM = new SHA512Managed();
-            return shaM.ComputeHash(data);
+            using (var shaM = new SHA512Managed())
+            {
+                return shaM.ComputeHash(data);
+            }
         }
     }
 }

@@ -14,10 +14,14 @@ namespace LoginSystem
             byte[] dbUsername = Encoding.ASCII.GetBytes("admin");
             byte[] dbPassword = Encoding.ASCII.GetBytes("test");
 
-            var shaM = new SHA512Managed();
+            byte[] dbUsernameHash;
+            byte[] dbPasswordHash;
 
-            byte[] dbUsernameHash = shaM.ComputeHash(dbUsername);
-            byte[] dbPasswordHash = shaM.ComputeHash(dbPassword);
+            using (var shaM = new SHA512Managed())
+            {
+                dbUsernameHash = shaM.ComputeHash(dbUsername);
+                dbPasswordHash = shaM.ComputeHash(dbPassword);
+            }
 
             return dbUsernameHash == usernameHash && dbPasswordHash == passwordHash;
         }

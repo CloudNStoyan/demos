@@ -23,7 +23,8 @@ namespace SubtitleManager
             this.InitializeComponent();
             if (File.Exists("./temp.txt"))
             {
-                this.FileData = File.ReadAllText("./temp.txt", Encoding.Default);
+                this.FileData = this.ReadFileText("./temp.txt");
+                this.CurrentSubPath = "./temp.txt";
                 this.Subs = this.ParseSrt(this.FileData.Split('\n'));
                 MessageBox.Show("Loaded subs from last use.");
             }
@@ -64,7 +65,7 @@ namespace SubtitleManager
             if (this.Subs != null && this.Subs.Length > 0)
             {
                 this.Subs[this.CurrentSub].Text = this.SubtitleArea.Text;
-                File.WriteAllLines("./temp.srt", this.Subs.Select(x => x.Order + "\r\n" + x.Text + "\r\n" + x.Timeline).ToArray());
+                this.WriteFileText("./temp.srt", this.Subs.Select(x => x.Order + "\r\n" + x.Text + "\r\n" + x.Timeline).ToArray());
             }
         }
 
@@ -72,7 +73,7 @@ namespace SubtitleManager
         {
             string subs = string.Join("\r\n",
                 this.Subs.Select(x => x.Order + "\r\n" + x.Text + "\r\n" + x.Timeline).ToArray());
-            File.WriteAllText(this.CurrentSubPath, subs);
+            this.WriteFileText(this.CurrentSubPath, subs);
             File.Delete("./temp.txt");
             MessageBox.Show("Subs are saved to:" + this.CurrentSubPath);
         }
@@ -121,6 +122,30 @@ namespace SubtitleManager
             }
 
             return "";
+        }
+
+        private void WriteFileText(string path, string content)
+        {
+            try
+            {
+                File.WriteAllText(path, content);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
+
+        private void WriteFileText(string path, string[] content)
+        {
+            try
+            {
+                File.WriteAllLines(path, content);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
     }
 }

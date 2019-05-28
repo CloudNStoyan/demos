@@ -11,10 +11,10 @@ namespace TryingPuppeeteerSharp
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            var task = Task.Run(Run);
-            task.Wait();
+            await Run();
+
             Process.Start("dwarf.jpg");
             Console.WriteLine("Dwarf");
         }
@@ -22,7 +22,6 @@ namespace TryingPuppeeteerSharp
         static async Task Run()
         {
             string url = "https://www.transformice.com/";
-            await new BrowserFetcher().DownloadAsync(BrowserFetcher.DefaultRevision);
             var browser = await Puppeteer.LaunchAsync(new LaunchOptions
             {
                 Headless = false
@@ -36,13 +35,6 @@ namespace TryingPuppeeteerSharp
             });
 
             await page.GoToAsync(url);
-
-            await page.ClickAsync("#swf2");
-            await page.WaitForTimeoutAsync(20000);
-            await page.Keyboard.PressAsync("ArrowLeft", new PressOptions()
-            {
-                Delay = 2000
-            });
 
             await page.ScreenshotAsync("dwarf.jpg");
         }
