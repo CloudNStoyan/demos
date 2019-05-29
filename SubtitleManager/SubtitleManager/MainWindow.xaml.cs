@@ -74,7 +74,7 @@ namespace SubtitleManager
             string subs = string.Join("\r\n",
                 this.Subs.Select(x => x.Order + "\r\n" + x.Text + "\r\n" + x.Timeline).ToArray());
             this.WriteFileText(this.CurrentSubPath, subs);
-            File.Delete("./temp.txt");
+            this.DeleteFile("./temp.txt");
             MessageBox.Show("Subs are saved to:" + this.CurrentSubPath);
         }
 
@@ -141,6 +141,18 @@ namespace SubtitleManager
             try
             {
                 File.WriteAllLines(path, content);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
+
+        private void DeleteFile(string path)
+        {
+            try
+            {
+                File.Delete(path);
             }
             catch (Exception e)
             {
