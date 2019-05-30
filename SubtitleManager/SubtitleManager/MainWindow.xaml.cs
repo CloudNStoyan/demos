@@ -57,6 +57,7 @@ namespace SubtitleManager
         private void PreviousSub(object s, EventArgs e)
         {
             this.SubtitleArea.Text = this.Subs[this.CurrentSub].Text;
+            this.Timestamp.Text = this.Subs[this.CurrentSub].Timeline;
             this.CurrentSub--;
         }
 
