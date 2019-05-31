@@ -46,19 +46,25 @@ namespace SubtitleManager
             }
 
 	        this.Subs = this.ParseSrt(this.FileData.Split('\n'));
+            this.FillSub();
         }
 
         private void NextSub(object s, EventArgs e)
         {
-            this.SubtitleArea.Text = this.Subs[this.CurrentSub].Text;
             this.CurrentSub++;
+            this.FillSub();
         }
 
         private void PreviousSub(object s, EventArgs e)
         {
+            this.CurrentSub--;
+            this.FillSub();
+        }
+
+        private void FillSub()
+        {
             this.SubtitleArea.Text = this.Subs[this.CurrentSub].Text;
             this.Timestamp.Text = this.Subs[this.CurrentSub].Timeline;
-            this.CurrentSub--;
         }
 
         private void EditSub(object s, EventArgs e)
