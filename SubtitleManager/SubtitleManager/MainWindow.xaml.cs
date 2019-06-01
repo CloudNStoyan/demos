@@ -17,6 +17,7 @@ namespace SubtitleManager
         private Srt[] Subs { get; set; }
         private int CurrentSub { get; set; }
         private string CurrentSubPath { get; set; }
+        private bool SubsAreLoaded { get; set; }
 
         public MainWindow()
         {
@@ -47,18 +48,33 @@ namespace SubtitleManager
 
 	        this.Subs = this.ParseSrt(this.FileData.Split('\n'));
             this.FillSub();
+            this.SubsAreLoaded = true;
         }
 
         private void NextSub(object s, EventArgs e)
         {
-            this.CurrentSub++;
-            this.FillSub();
+            if (this.SubsAreLoaded)
+            {
+                this.CurrentSub++;
+                this.FillSub();
+            }
+            else
+            {
+                MessageBox.Show("No subs loaded!");
+            }
         }
 
         private void PreviousSub(object s, EventArgs e)
         {
-            this.CurrentSub--;
-            this.FillSub();
+            if (this.SubsAreLoaded)
+            {
+                this.CurrentSub--;
+                this.FillSub();
+            }
+            else
+            {
+                MessageBox.Show("No subs loaded!");
+            }
         }
 
         private void FillSub()
