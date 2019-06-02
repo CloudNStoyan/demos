@@ -14,7 +14,7 @@ namespace SubtitleManager
 
         public static Srt Parse(string[] srtTemplate)
         {
-            return new Srt()
+            return new Srt
             {
                 Order = int.Parse(srtTemplate[0]),
                 Timeline = srtTemplate[1],

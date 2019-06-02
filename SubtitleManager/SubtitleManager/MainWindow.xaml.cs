@@ -81,6 +81,7 @@ namespace SubtitleManager
         {
             this.SubtitleArea.Text = this.Subs[this.CurrentSub].Text;
             this.Timestamp.Text = this.Subs[this.CurrentSub].Timeline;
+            this.Order.Text = this.Subs[this.CurrentSub].Order.ToString();
         }
 
         private void EditSub(object s, EventArgs e)
