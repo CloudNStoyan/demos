@@ -96,7 +96,7 @@ namespace SubtitleManager
         private void SaveSubs(object s, EventArgs e)
         {
             string subs = string.Join("\r\n",
-                this.Subs.Select(x => x.Order + "\r\n" + x.Text + "\r\n" + x.Timeline).ToArray());
+                this.Subs.Select(x => x.Order + "\r\n" + x.Text + "\r\n" + x.Timeline + "\r\n").ToArray());
             this.WriteFileText(this.CurrentSubPath, subs);
             this.DeleteFile("./temp.txt");
             MessageBox.Show("Subs are saved to:" + this.CurrentSubPath);
@@ -152,7 +152,7 @@ namespace SubtitleManager
         {
             try
             {
-                File.WriteAllText(path, content);
+                File.WriteAllText(path, content, Encoding.Default);
             }
             catch (Exception e)
             {
@@ -164,7 +164,7 @@ namespace SubtitleManager
         {
             try
             {
-                File.WriteAllLines(path, content);
+                File.WriteAllLines(path, content, Encoding.Default);
             }
             catch (Exception e)
             {
