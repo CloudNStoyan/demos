@@ -25,8 +25,8 @@ namespace SubtitleManager
             if (File.Exists("./temp.txt"))
             {
                 this.FileData = this.ReadFileText("./temp.txt");
-                this.CurrentSubPath = "./temp.txt";
-                this.Subs = this.ParseSrt(this.FileData.Split('\n'));
+                this.CurrentSubPath = this.FileData.Split('\n')[0];
+                this.Subs = this.ParseSrt(this.FileData.Split('\n').Skip(1).ToArray());
                 MessageBox.Show("Loaded subs from last use.");
             }
         }
@@ -89,7 +89,9 @@ namespace SubtitleManager
             if (this.Subs != null && this.Subs.Length > 0)
             {
                 this.Subs[this.CurrentSub].Text = this.SubtitleArea.Text;
-                this.WriteFileText("./temp.srt", this.Subs.Select(x => x.Order + "\r\n" + x.Text + "\r\n" + x.Timeline).ToArray());
+                var list = new List<string> {"#" + this.CurrentSubPath + "\r\n"};
+                list.AddRange(this.Subs.Select(x => x.Order + "\r\n" + x.Text + "\r\n" + x.Timeline));
+                this.WriteFileText("./temp.srt", list.ToArray());
             }
         }
 
