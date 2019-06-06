@@ -14,7 +14,7 @@ namespace SubtitleManager
     public partial class MainWindow : Window
     {
         private string FileData { get; set; }
-        private Srt[] Subs { get; set; }
+        private Srt[] SrtSubs { get; set; }
         private int CurrentSub { get; set; }
         private string CurrentSubPath { get; set; }
         private bool SubsAreLoaded { get; set; }
@@ -26,7 +26,7 @@ namespace SubtitleManager
             {
                 this.FileData = this.ReadFileText("./temp.txt");
                 this.CurrentSubPath = this.FileData.Split('\n')[0];
-                this.Subs = this.ParseSrt(this.FileData.Split('\n').Skip(1).ToArray());
+                this.SrtSubs = this.ParseSrt(this.FileData.Split('\n').Skip(1).ToArray());
                 MessageBox.Show("Loaded subs from last use.");
             }
         }
@@ -36,7 +36,7 @@ namespace SubtitleManager
             var dialog = new OpenFileDialog
             {
                 DefaultExt = ".srt",
-                Filter = "Subtitle Files (*.srt)|*.srt"
+                Filter = "Srt Files (*.srt)|*.srt|Sub Files (*.sub)|*.sub"
             };
 
             if (dialog.ShowDialog() == true)
@@ -46,7 +46,7 @@ namespace SubtitleManager
                 this.CurrentSubPath = filePath;
             }
 
-	        this.Subs = this.ParseSrt(this.FileData.Split('\n'));
+	        this.SrtSubs = this.ParseSrt(this.FileData.Split('\n'));
             this.FillSub();
             this.SubsAreLoaded = true;
         }
@@ -79,18 +79,18 @@ namespace SubtitleManager
 
         private void FillSub()
         {
-            this.SubtitleArea.Text = this.Subs[this.CurrentSub].Text;
-            this.Timestamp.Text = this.Subs[this.CurrentSub].Timeline;
-            this.Order.Text = this.Subs[this.CurrentSub].Order.ToString();
+            this.SubtitleArea.Text = this.SrtSubs[this.CurrentSub].Text;
+            this.Timestamp.Text = this.SrtSubs[this.CurrentSub].Timeline;
+            this.Order.Text = this.SrtSubs[this.CurrentSub].Order.ToString();
         }
 
         private void EditSub(object s, EventArgs e)
         {
-            if (this.Subs != null && this.Subs.Length > 0)
+            if (this.SrtSubs != null && this.SrtSubs.Length > 0)
             {
-                this.Subs[this.CurrentSub].Text = this.SubtitleArea.Text;
+                this.SrtSubs[this.CurrentSub].Text = this.SubtitleArea.Text;
                 var list = new List<string> {"#" + this.CurrentSubPath + "\r\n"};
-                list.AddRange(this.Subs.Select(x => x.Order + "\r\n" + x.Text + "\r\n" + x.Timeline));
+                list.AddRange(this.SrtSubs.Select(x => x.Order + "\r\n" + x.Text + "\r\n" + x.Timeline));
                 this.WriteFileText("./temp.srt", list.ToArray());
             }
         }
@@ -98,10 +98,10 @@ namespace SubtitleManager
         private void SaveSubs(object s, EventArgs e)
         {
             string subs = string.Join("\r\n",
-                this.Subs.Select(x => x.Order + "\r\n" + x.Text + "\r\n" + x.Timeline + "\r\n").ToArray());
+                this.SrtSubs.Select(x => x.Order + "\r\n" + x.Text + "\r\n" + x.Timeline + "\r\n").ToArray());
             this.WriteFileText(this.CurrentSubPath, subs);
             this.DeleteFile("./temp.txt");
-            MessageBox.Show("Subs are saved to:" + this.CurrentSubPath);
+            MessageBox.Show("SrtSubs are saved to:" + this.CurrentSubPath);
         }
 
         private Srt[] ParseSrt(string[] srtTextLines)
