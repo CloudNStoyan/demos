@@ -14,7 +14,7 @@ namespace SubtitleManager
     public partial class MainWindow : Window
     {
         private string FileData { get; set; }
-        private Srt[] SrtSubs { get; set; }
+        private SubRip[] SubRipSubs { get; set; }
         private int CurrentSub { get; set; }
         private string CurrentSubPath { get; set; }
         private bool SubsAreLoaded { get; set; }
@@ -26,7 +26,7 @@ namespace SubtitleManager
             {
                 this.FileData = this.ReadFileText("./temp.txt");
                 this.CurrentSubPath = this.FileData.Split('\n')[0];
-                this.SrtSubs = this.ParseSrt(this.FileData.Split('\n').Skip(1).ToArray());
+                this.SubRipSubs = this.ParseSrt(this.FileData.Split('\n').Skip(1).ToArray());
                 MessageBox.Show("Loaded subs from last use.");
             }
         }
@@ -35,8 +35,8 @@ namespace SubtitleManager
         {
             var dialog = new OpenFileDialog
             {
-                DefaultExt = ".srt",
-                Filter = "Srt Files (*.srt)|*.srt|Sub Files (*.sub)|*.sub"
+                DefaultExt = ".srt|.sub",
+                Filter = "SubRip Files (*.srt)|*.srt|Sub Files (*.sub)|*.sub|Aegisub Files (*.ass)|*.ass"
             };
 
             if (dialog.ShowDialog() == true)
@@ -46,7 +46,7 @@ namespace SubtitleManager
                 this.CurrentSubPath = filePath;
             }
 
-	        this.SrtSubs = this.ParseSrt(this.FileData.Split('\n'));
+	        this.SubRipSubs = this.ParseSrt(this.FileData.Split('\n'));
             this.FillSub();
             this.SubsAreLoaded = true;
         }
@@ -79,18 +79,18 @@ namespace SubtitleManager
 
         private void FillSub()
         {
-            this.SubtitleArea.Text = this.SrtSubs[this.CurrentSub].Text;
-            this.Timestamp.Text = this.SrtSubs[this.CurrentSub].Timeline;
-            this.Order.Text = this.SrtSubs[this.CurrentSub].Order.ToString();
+            this.SubtitleArea.Text = this.SubRipSubs[this.CurrentSub].Text;
+            this.Timestamp.Text = this.SubRipSubs[this.CurrentSub].Timeline;
+            this.Order.Text = this.SubRipSubs[this.CurrentSub].Order.ToString();
         }
 
         private void EditSub(object s, EventArgs e)
         {
-            if (this.SrtSubs != null && this.SrtSubs.Length > 0)
+            if (this.SubRipSubs != null && this.SubRipSubs.Length > 0)
             {
-                this.SrtSubs[this.CurrentSub].Text = this.SubtitleArea.Text;
+                this.SubRipSubs[this.CurrentSub].Text = this.SubtitleArea.Text;
                 var list = new List<string> {"#" + this.CurrentSubPath + "\r\n"};
-                list.AddRange(this.SrtSubs.Select(x => x.Order + "\r\n" + x.Text + "\r\n" + x.Timeline));
+                list.AddRange(this.SubRipSubs.Select(x => x.Order + "\r\n" + x.Text + "\r\n" + x.Timeline));
                 this.WriteFileText("./temp.srt", list.ToArray());
             }
         }
@@ -98,13 +98,13 @@ namespace SubtitleManager
         private void SaveSubs(object s, EventArgs e)
         {
             string subs = string.Join("\r\n",
-                this.SrtSubs.Select(x => x.Order + "\r\n" + x.Text + "\r\n" + x.Timeline + "\r\n").ToArray());
+                this.SubRipSubs.Select(x => x.Order + "\r\n" + x.Text + "\r\n" + x.Timeline + "\r\n").ToArray());
             this.WriteFileText(this.CurrentSubPath, subs);
             this.DeleteFile("./temp.txt");
-            MessageBox.Show("SrtSubs are saved to:" + this.CurrentSubPath);
+            MessageBox.Show("SubRipSubs are saved to:" + this.CurrentSubPath);
         }
 
-        private Srt[] ParseSrt(string[] srtTextLines)
+        private SubRip[] ParseSrt(string[] srtTextLines)
         {
             var list = new List<string[]>();
 
@@ -123,13 +123,13 @@ namespace SubtitleManager
                 }
             }
 
-            var srtList = new List<Srt>();
+            var srtList = new List<SubRip>();
 
             foreach (string[] srtTemplate in list)
             {
                 if (srtTemplate.Length > 2)
                 {
-                    srtList.Add(Srt.Parse(srtTemplate));
+                    srtList.Add(SubRip.Parse(srtTemplate));
                 }
             }
 

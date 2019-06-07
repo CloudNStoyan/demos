@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SubtitleManager
+﻿namespace SubtitleManager
 {
-    class Srt
+    class SubRip
     {
         public int Order { get; set; }
         public string Timeline { get; set; }
         public string Text { get; set; }
 
-        public static Srt Parse(string[] srtTemplate)
+        public static SubRip Parse(string[] srtTemplate)
         {
-            return new Srt
+            return new SubRip
             {
                 Order = int.Parse(srtTemplate[0]),
                 Timeline = srtTemplate[1],
