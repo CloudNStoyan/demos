@@ -46,7 +46,15 @@ namespace SubtitleManager
                 this.CurrentSubPath = filePath;
             }
 
-	        this.SubRipSubs = this.ParseSrt(this.FileData.Split('\n'));
+            string extension = Path.GetExtension(this.CurrentSubPath);
+
+            if (extension == ".srt")
+            {
+                this.SubRipSubs = this.ParseSrt(this.FileData.Split('\n'));
+            } else if (extension == ".ass")
+            {
+
+            }
             this.FillSub();
             this.SubsAreLoaded = true;
         }
