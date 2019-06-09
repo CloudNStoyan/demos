@@ -15,6 +15,7 @@ namespace SubtitleManager
     {
         private string FileData { get; set; }
         private SubRip[] SubRipSubs { get; set; }
+        private Aegisub[] Aegisubs { get; set; }
         private int CurrentSub { get; set; }
         private string CurrentSubPath { get; set; }
         private bool SubsAreLoaded { get; set; }
@@ -48,13 +49,16 @@ namespace SubtitleManager
 
             string extension = Path.GetExtension(this.CurrentSubPath);
 
-            if (extension == ".srt")
+            switch (extension)
             {
-                this.SubRipSubs = this.ParseSrt(this.FileData.Split('\n'));
-            } else if (extension == ".ass")
-            {
+                case ".srt":
+                    this.SubRipSubs = this.ParseSrt(this.FileData.Split('\n'));
+                    break;
+                case ".ass":
 
+                    break;
             }
+
             this.FillSub();
             this.SubsAreLoaded = true;
         }
@@ -105,11 +109,18 @@ namespace SubtitleManager
 
         private void SaveSubs(object s, EventArgs e)
         {
-            string subs = string.Join("\r\n",
-                this.SubRipSubs.Select(x => x.Order + "\r\n" + x.Text + "\r\n" + x.Timeline + "\r\n").ToArray());
-            this.WriteFileText(this.CurrentSubPath, subs);
-            this.DeleteFile("./temp.txt");
-            MessageBox.Show("SubRipSubs are saved to:" + this.CurrentSubPath);
+            if (this.SubsAreLoaded)
+            {
+                string subs = string.Join("\r\n",
+                    this.SubRipSubs.Select(x => x.Order + "\r\n" + x.Text + "\r\n" + x.Timeline + "\r\n").ToArray());
+                this.WriteFileText(this.CurrentSubPath, subs);
+                this.DeleteFile("./temp.txt");
+                MessageBox.Show("SubRipSubs are saved to:" + this.CurrentSubPath);
+            }
+            else
+            {
+                MessageBox.Show("You need to load subs first!");
+            }
         }
 
         private SubRip[] ParseSrt(string[] srtTextLines)
@@ -142,6 +153,11 @@ namespace SubtitleManager
             }
 
             return srtList.ToArray();
+        }
+
+        private Aegisub[] ParseAss(string[] assTextLines)
+        {
+            return new Aegisub[1];
         }
 
         private string ReadFileText(string path)
