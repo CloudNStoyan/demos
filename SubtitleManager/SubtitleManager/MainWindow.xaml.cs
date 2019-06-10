@@ -28,7 +28,7 @@ namespace SubtitleManager
                 this.FileData = this.ReadFileText("./temp.txt");
                 this.CurrentSubPath = this.FileData.Split('\n')[0];
                 this.SubRipSubs = this.ParseSrt(this.FileData.Split('\n').Skip(1).ToArray());
-                MessageBox.Show("Loaded subs from last use.");
+                AlertService.Alert("Loaded subs from last use.");
             }
         }
 
@@ -72,7 +72,7 @@ namespace SubtitleManager
             }
             else
             {
-                MessageBox.Show("No subs loaded!");
+                AlertService.Alert("No subs loaded!");
             }
         }
 
@@ -85,7 +85,7 @@ namespace SubtitleManager
             }
             else
             {
-                MessageBox.Show("No subs loaded!");
+                AlertService.Alert("No subs loaded!");
             }
         }
 
@@ -115,11 +115,11 @@ namespace SubtitleManager
                     this.SubRipSubs.Select(x => x.Order + "\r\n" + x.Text + "\r\n" + x.Timeline + "\r\n").ToArray());
                 this.WriteFileText(this.CurrentSubPath, subs);
                 this.DeleteFile("./temp.txt");
-                MessageBox.Show("SubRipSubs are saved to:" + this.CurrentSubPath);
+                AlertService.Alert("SubRipSubs are saved to:" + this.CurrentSubPath);
             }
             else
             {
-                MessageBox.Show("You need to load subs first!");
+                AlertService.Alert("You need to load subs first!");
             }
         }
 
@@ -168,7 +168,7 @@ namespace SubtitleManager
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                AlertService.Alert(e.Message);
             }
 
             return "";
@@ -182,7 +182,7 @@ namespace SubtitleManager
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                AlertService.Alert(e.Message);
             }
         }
 
@@ -194,7 +194,7 @@ namespace SubtitleManager
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                AlertService.Alert(e.Message);
             }
         }
 
@@ -206,7 +206,7 @@ namespace SubtitleManager
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                AlertService.Alert(e.Message);
             }
         }
     }
