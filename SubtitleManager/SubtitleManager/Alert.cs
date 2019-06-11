@@ -2,11 +2,18 @@
 
 namespace SubtitleManager
 {
+    public enum AlertType
+    {
+        Alert,
+        Warning,
+        Info
+    }
+
     public static class AlertService
     {
-        public static void Alert(string message)
+        public static void Alert(string message, AlertType alertType)
         {
-            MessageBox.Show(message, "Alert");
+            MessageBox.Show(message, alertType.ToString());
         }
     }
 }
