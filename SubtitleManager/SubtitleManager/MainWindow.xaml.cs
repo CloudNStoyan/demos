@@ -59,6 +59,7 @@ namespace SubtitleManager
                     break;
             }
 
+            this.SubCount.Text = this.SubRipSubs.Length.ToString();
             this.FillSub();
             this.SubsAreLoaded = true;
         }
