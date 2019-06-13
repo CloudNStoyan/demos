@@ -43,25 +43,31 @@ namespace SubtitleManager
             if (dialog.ShowDialog() == true)
             {
                 string filePath = dialog.FileName;
-                this.FileData = this.ReadFileText(filePath);
-                this.CurrentSubPath = filePath;
+                if (!string.IsNullOrWhiteSpace(filePath))
+                {
+                    this.FileData = this.ReadFileText(filePath);
+                    this.CurrentSubPath = filePath;
+                    string extension = Path.GetExtension(this.CurrentSubPath);
+
+                    switch (extension)
+                    {
+                        case ".srt":
+                            this.SubRipSubs = this.ParseSrt(this.FileData.Split('\n'));
+                            break;
+                        case ".ass":
+
+                            break;
+                    }
+
+                    this.SubCount.Text = this.SubRipSubs.Length.ToString();
+                    this.FillSub();
+                    this.SubsAreLoaded = true;
+                }
+                else
+                {
+                    AlertService.Alert("No subs were loaded!", AlertType.Warning);
+                }
             }
-
-            string extension = Path.GetExtension(this.CurrentSubPath);
-
-            switch (extension)
-            {
-                case ".srt":
-                    this.SubRipSubs = this.ParseSrt(this.FileData.Split('\n'));
-                    break;
-                case ".ass":
-
-                    break;
-            }
-
-            this.SubCount.Text = this.SubRipSubs.Length.ToString();
-            this.FillSub();
-            this.SubsAreLoaded = true;
         }
 
         private void NextSub(object s, EventArgs e)
