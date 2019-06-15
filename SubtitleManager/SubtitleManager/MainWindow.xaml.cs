@@ -71,8 +71,11 @@ namespace SubtitleManager
         {
             if (this.SubsAreLoaded)
             {
-                this.CurrentSub++;
-                this.FillSub();
+                if (this.CurrentSub + 1 <= this.SubRipSubs.Length - 1)
+                {
+                    this.CurrentSub++;
+                    this.FillSub();
+                }
             }
             else
             {
@@ -84,8 +87,11 @@ namespace SubtitleManager
         {
             if (this.SubsAreLoaded)
             {
-                this.CurrentSub--;
-                this.FillSub();
+                if (this.CurrentSub - 1 >= 0)
+                {
+                    this.CurrentSub--;
+                    this.FillSub();
+                }
             }
             else
             {
