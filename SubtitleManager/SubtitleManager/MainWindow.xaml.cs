@@ -58,7 +58,7 @@ namespace SubtitleManager
                 }
 
                 this.SubCount.Text = this.SubRipSubs.Length.ToString();
-                this.FillSub();
+                this.FillSub(SubtitleType.Aegisub);
                 this.SubsAreLoaded = true;
             }
             else
@@ -74,7 +74,7 @@ namespace SubtitleManager
                 if (this.CurrentSub + 1 <= this.SubRipSubs.Length - 1)
                 {
                     this.CurrentSub++;
-                    this.FillSub();
+                    this.FillSub(SubtitleType.Aegisub);
                 }
             }
             else
@@ -90,7 +90,7 @@ namespace SubtitleManager
                 if (this.CurrentSub - 1 >= 0)
                 {
                     this.CurrentSub--;
-                    this.FillSub();
+                    this.FillSub(SubtitleType.SubRip);
                 }
             }
             else
@@ -99,11 +99,18 @@ namespace SubtitleManager
             }
         }
 
-        private void FillSub()
+        private void FillSub(SubtitleType subtitleType)
         {
-            this.SubtitleArea.Text = this.SubRipSubs[this.CurrentSub].Text;
-            this.Timestamp.Text = this.SubRipSubs[this.CurrentSub].Timeline;
-            this.Order.Text = this.SubRipSubs[this.CurrentSub].Order.ToString();
+            switch (subtitleType)
+            {
+                case SubtitleType.Aegisub:
+                    this.SubtitleArea.Text = this.SubRipSubs[this.CurrentSub].Text;
+                    this.Timestamp.Text = this.SubRipSubs[this.CurrentSub].Timeline;
+                    this.Order.Text = this.SubRipSubs[this.CurrentSub].Order.ToString();
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void EditSub(object s, EventArgs e)

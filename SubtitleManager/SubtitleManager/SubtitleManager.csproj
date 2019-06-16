@@ -58,6 +58,7 @@
     <Compile Include="Aegisub.cs" />
     <Compile Include="Alert.cs" />
     <Compile Include="Srt.cs" />
+    <Compile Include="SubtitleType.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
