@@ -74,7 +74,7 @@ namespace SubtitleManager
                 if (this.CurrentSub + 1 <= this.SubRipSubs.Length - 1)
                 {
                     this.CurrentSub++;
-                    this.FillSub(SubtitleType.Aegisub);
+                    this.FillSub(SubtitleType.SubRip);
                 }
             }
             else
@@ -103,7 +103,7 @@ namespace SubtitleManager
         {
             switch (subtitleType)
             {
-                case SubtitleType.Aegisub:
+                case SubtitleType.SubRip:
                     this.SubtitleArea.Text = this.SubRipSubs[this.CurrentSub].Text;
                     this.Timestamp.Text = this.SubRipSubs[this.CurrentSub].Timeline;
                     this.Order.Text = this.SubRipSubs[this.CurrentSub].Order.ToString();
