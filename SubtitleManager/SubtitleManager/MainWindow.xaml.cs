@@ -19,6 +19,7 @@ namespace SubtitleManager
         private int CurrentSub { get; set; }
         private string CurrentSubPath { get; set; }
         private bool SubsAreLoaded { get; set; }
+        private SubtitleType LoadedSubtitleType { get; set; }
 
         public MainWindow()
         {
@@ -51,6 +52,7 @@ namespace SubtitleManager
                 {
                     case ".srt":
                         this.SubRipSubs = this.ParseSrt(this.FileData.Split('\n'));
+                        this.LoadedSubtitleType = SubtitleType.SubRip;
                         break;
                     case ".ass":
 
@@ -58,7 +60,7 @@ namespace SubtitleManager
                 }
 
                 this.SubCount.Text = this.SubRipSubs.Length.ToString();
-                this.FillSub(SubtitleType.Aegisub);
+                this.FillSub();
                 this.SubsAreLoaded = true;
             }
             else
@@ -74,7 +76,7 @@ namespace SubtitleManager
                 if (this.CurrentSub + 1 <= this.SubRipSubs.Length - 1)
                 {
                     this.CurrentSub++;
-                    this.FillSub(SubtitleType.SubRip);
+                    this.FillSub();
                 }
             }
             else
@@ -90,7 +92,7 @@ namespace SubtitleManager
                 if (this.CurrentSub - 1 >= 0)
                 {
                     this.CurrentSub--;
-                    this.FillSub(SubtitleType.SubRip);
+                    this.FillSub();
                 }
             }
             else
@@ -99,9 +101,9 @@ namespace SubtitleManager
             }
         }
 
-        private void FillSub(SubtitleType subtitleType)
+        private void FillSub()
         {
-            switch (subtitleType)
+            switch (this.LoadedSubtitleType)
             {
                 case SubtitleType.SubRip:
                     this.SubtitleArea.Text = this.SubRipSubs[this.CurrentSub].Text;
