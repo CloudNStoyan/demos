@@ -78,6 +78,10 @@ namespace SubtitleManager
                     this.CurrentSub++;
                     this.FillSub();
                 }
+                else
+                {
+                    AlertService.Alert("No more subs", AlertType.Info);
+                }
             }
             else
             {
@@ -93,6 +97,10 @@ namespace SubtitleManager
                 {
                     this.CurrentSub--;
                     this.FillSub();
+                }
+                else
+                {
+                    AlertService.Alert("No more subs", AlertType.Info);
                 }
             }
             else
