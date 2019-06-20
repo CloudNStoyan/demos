@@ -55,7 +55,8 @@ namespace SubtitleManager
                         this.LoadedSubtitleType = SubtitleType.SubRip;
                         break;
                     case ".ass":
-
+                        this.Aegisubs = this.ParseAss(this.FileData.Split('\n'));
+                        this.LoadedSubtitleType = SubtitleType.Aegisub;
                         break;
                 }
 
