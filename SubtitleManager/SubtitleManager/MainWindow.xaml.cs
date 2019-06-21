@@ -46,9 +46,7 @@ namespace SubtitleManager
                 string filePath = dialog.FileName;
                 this.FileData = this.ReadFileText(filePath);
                 this.CurrentSubPath = filePath;
-                string extension = Path.GetExtension(this.CurrentSubPath);
-
-                switch (extension)
+                switch (Path.GetExtension(this.CurrentSubPath))
                 {
                     case ".srt":
                         this.SubRipSubs = this.ParseSrt(this.FileData.Split('\n'));
