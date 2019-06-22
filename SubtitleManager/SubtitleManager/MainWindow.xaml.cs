@@ -50,15 +50,16 @@ namespace SubtitleManager
                 {
                     case ".srt":
                         this.SubRipSubs = this.ParseSrt(this.FileData.Split('\n'));
+                        this.SubCount.Text = this.SubRipSubs.Length.ToString();
                         this.LoadedSubtitleType = SubtitleType.SubRip;
                         break;
                     case ".ass":
                         this.Aegisubs = this.ParseAss(this.FileData.Split('\n'));
+                        this.SubCount.Text = this.Aegisubs.Length.ToString();
                         this.LoadedSubtitleType = SubtitleType.Aegisub;
                         break;
                 }
 
-                this.SubCount.Text = this.SubRipSubs.Length.ToString();
                 this.FillSub();
                 this.SubsAreLoaded = true;
             }
