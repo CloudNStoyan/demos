@@ -43,9 +43,8 @@ namespace SubtitleManager
 
             if (dialog.ShowDialog() == true)
             {
-                string filePath = dialog.FileName;
-                this.FileData = this.ReadFileText(filePath);
-                this.CurrentSubPath = filePath;
+                this.CurrentSubPath = dialog.FileName;
+                this.FileData = this.ReadFileText(this.CurrentSubPath);
                 switch (Path.GetExtension(this.CurrentSubPath))
                 {
                     case ".srt":
