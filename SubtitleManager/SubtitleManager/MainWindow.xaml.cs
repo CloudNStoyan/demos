@@ -70,42 +70,58 @@ namespace SubtitleManager
 
         private void NextSub(object s, EventArgs e)
         {
-            if (this.SubsAreLoaded)
+            if (this.ValidateSubMoving())
             {
-                if (this.CurrentSub + 1 <= this.SubRipSubs.Length - 1)
-                {
-                    this.CurrentSub++;
-                    this.FillSub();
-                }
-                else
-                {
-                    AlertService.Alert("No more subs", AlertType.Info);
-                }
+                this.CurrentSub++;
+                this.FillSub();
             }
-            else
-            {
-                AlertService.Alert("No subs loaded!", AlertType.Alert);
-            }
+
+            //if (this.SubsAreLoaded)
+            //{
+            //    if (this.CurrentSub + 1 <= this.SubRipSubs.Length - 1)
+            //    {
+            //        this.CurrentSub++;
+            //        this.FillSub();
+            //    }
+            //    else
+            //    {
+            //        AlertService.Alert("No more subs", AlertType.Info);
+            //    }
+            //}
+            //else
+            //{
+            //    AlertService.Alert("No subs loaded!", AlertType.Alert);
+            //}
         }
 
         private void PreviousSub(object s, EventArgs e)
         {
-            if (this.SubsAreLoaded)
+            if (this.ValidateSubMoving())
             {
-                if (this.CurrentSub - 1 >= 0)
-                {
-                    this.CurrentSub--;
-                    this.FillSub();
-                }
-                else
-                {
-                    AlertService.Alert("No more subs", AlertType.Info);
-                }
+                this.CurrentSub--;
+                this.FillSub();
             }
-            else
-            {
-                AlertService.Alert("No subs loaded!", AlertType.Alert);
-            }
+
+            //if (this.SubsAreLoaded)
+            //{
+            //    if (this.CurrentSub - 1 >= 0)
+            //    {
+            //        
+            //    }
+            //    else
+            //    {
+            //        AlertService.Alert("No more subs", AlertType.Info);
+            //    }
+            //}
+            //else
+            //{
+            //    AlertService.Alert("No subs loaded!", AlertType.Alert);
+            //}
+        }
+
+        private bool ValidateSubMoving()
+        {
+            return this.SubsAreLoaded && this.CurrentSub - 1 >= 0 && this.CurrentSub + 1 <= this.SubRipSubs.Length - 1;
         }
 
         private void FillSub()
