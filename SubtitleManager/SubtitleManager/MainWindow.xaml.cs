@@ -121,7 +121,19 @@ namespace SubtitleManager
 
         private bool ValidateSubMoving()
         {
-            return this.SubsAreLoaded && this.CurrentSub - 1 >= 0 && this.CurrentSub + 1 <= this.SubRipSubs.Length - 1;
+            if (!this.SubsAreLoaded)
+            {
+                AlertService.Alert("No subs loaded!", AlertType.Alert);
+                return false;
+            }
+
+            if (!(this.CurrentSub - 1 >= 0 && this.CurrentSub + 1 <= this.SubRipSubs.Length - 1))
+            {
+                AlertService.Alert("No more subs", AlertType.Info);
+                return false;
+            }
+
+            return true;
         }
 
         private void FillSub()
