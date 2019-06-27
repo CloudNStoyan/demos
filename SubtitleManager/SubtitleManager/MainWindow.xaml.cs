@@ -75,23 +75,6 @@ namespace SubtitleManager
                 this.CurrentSub++;
                 this.FillSub();
             }
-
-            //if (this.SubsAreLoaded)
-            //{
-            //    if (this.CurrentSub + 1 <= this.SubRipSubs.Length - 1)
-            //    {
-            //        this.CurrentSub++;
-            //        this.FillSub();
-            //    }
-            //    else
-            //    {
-            //        AlertService.Alert("No more subs", AlertType.Info);
-            //    }
-            //}
-            //else
-            //{
-            //    AlertService.Alert("No subs loaded!", AlertType.Alert);
-            //}
         }
 
         private void PreviousSub(object s, EventArgs e)
@@ -101,22 +84,6 @@ namespace SubtitleManager
                 this.CurrentSub--;
                 this.FillSub();
             }
-
-            //if (this.SubsAreLoaded)
-            //{
-            //    if (this.CurrentSub - 1 >= 0)
-            //    {
-            //        
-            //    }
-            //    else
-            //    {
-            //        AlertService.Alert("No more subs", AlertType.Info);
-            //    }
-            //}
-            //else
-            //{
-            //    AlertService.Alert("No subs loaded!", AlertType.Alert);
-            //}
         }
 
         private bool ValidateSubMoving()
