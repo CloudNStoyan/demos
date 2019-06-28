@@ -70,7 +70,7 @@ namespace SubtitleManager
 
         private void NextSub(object s, EventArgs e)
         {
-            if (this.ValidateSubMoving())
+            if (this.ValidateSubMoving(SubtitleAction.Increment))
             {
                 this.CurrentSub++;
                 this.FillSub();
@@ -79,14 +79,14 @@ namespace SubtitleManager
 
         private void PreviousSub(object s, EventArgs e)
         {
-            if (this.ValidateSubMoving())
+            if (this.ValidateSubMoving(SubtitleAction.Decrement))
             {
                 this.CurrentSub--;
                 this.FillSub();
             }
         }
 
-        private bool ValidateSubMoving()
+        private bool ValidateSubMoving(SubtitleAction actionType)
         {
             if (!this.SubsAreLoaded)
             {
@@ -94,11 +94,12 @@ namespace SubtitleManager
                 return false;
             }
 
-            if (!(this.CurrentSub - 1 >= 0 && this.CurrentSub + 1 <= this.SubRipSubs.Length - 1))
+            if ((actionType == SubtitleAction.Increment && this.CurrentSub - 1 >= 0) || (actionType == SubtitleAction.Decrement && this.CurrentSub + 1 <= this.SubRipSubs.Length - 1))
             {
                 AlertService.Alert("No more subs", AlertType.Info);
                 return false;
             }
+
 
             return true;
         }

@@ -5,4 +5,10 @@
         Aegisub,
         SubRip
     }
+
+    public enum SubtitleAction
+    {
+        Increment,
+        Decrement
+    }
 }
