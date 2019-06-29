@@ -94,14 +94,20 @@ namespace SubtitleManager
                 return false;
             }
 
-            if ((actionType == SubtitleAction.Increment && this.CurrentSub - 1 >= 0) || (actionType == SubtitleAction.Decrement && this.CurrentSub + 1 <= this.SubRipSubs.Length - 1))
+            if (actionType == SubtitleAction.Increment && this.CurrentSub - 1 >= 0 ||
+                actionType == SubtitleAction.Decrement && this.CurrentSub + 1 <= this.SubRipSubs.Length - 1)
             {
-                AlertService.Alert("No more subs", AlertType.Info);
-                return false;
+                return true;
             }
 
+            //if ((actionType == SubtitleAction.Increment && this.CurrentSub - 1 >= 0) || (actionType == SubtitleAction.Decrement && this.CurrentSub + 1 <= this.SubRipSubs.Length - 1))
+            //{
+            //    AlertService.Alert("No more subs", AlertType.Info);
+            //    return false;
+            //}
 
-            return true;
+
+            return false;
         }
 
         private void FillSub()
