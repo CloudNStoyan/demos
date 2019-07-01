@@ -102,18 +102,6 @@ namespace SubtitleManager
 
             AlertService.Alert("No more subs", AlertType.Info);
             return false;
-
-            //if (actionType == SubtitleAction.Increment && this.CurrentSub - 1 >= 0 ||
-            //    actionType == SubtitleAction.Decrement && this.CurrentSub + 1 <= this.SubRipSubs.Length - 1)
-            //{
-            //    return true;
-            //}
-
-            //if ((actionType == SubtitleAction.Increment && this.CurrentSub - 1 >= 0) || (actionType == SubtitleAction.Decrement && this.CurrentSub + 1 <= this.SubRipSubs.Length - 1))
-            //{
-            //    AlertService.Alert("No more subs", AlertType.Info);
-            //    return false;
-            //}
         }
 
         private void FillSub()
