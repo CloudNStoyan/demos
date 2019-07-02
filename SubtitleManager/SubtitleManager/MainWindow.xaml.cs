@@ -61,6 +61,7 @@ namespace SubtitleManager
 
                 this.FillSub();
                 this.SubsAreLoaded = true;
+                this.CurrentSub = 0;
             }
             else
             {
