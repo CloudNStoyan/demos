@@ -24,9 +24,9 @@ namespace SubtitleManager
         public MainWindow()
         {
             this.InitializeComponent();
-            if (File.Exists("./temp.txt"))
+            if (File.Exists(CustomPaths.Temp))
             {
-                this.FileData = this.ReadFileText("./temp.txt");
+                this.FileData = this.ReadFileText(CustomPaths.Temp);
                 this.CurrentSubPath = this.FileData.Split('\n')[0];
                 this.SubRipSubs = this.ParseSrt(this.FileData.Split('\n').Skip(1).ToArray());
                 AlertService.Alert("Loaded subs from last use.", AlertType.Info);
@@ -126,7 +126,7 @@ namespace SubtitleManager
                 this.SubRipSubs[this.CurrentSub].Text = this.SubtitleArea.Text;
                 var list = new List<string> {"#" + this.CurrentSubPath + "\r\n"};
                 list.AddRange(this.SubRipSubs.Select(x => x.Order + "\r\n" + x.Text + "\r\n" + x.Timeline));
-                this.WriteFileText("./temp.srt", list.ToArray());
+                this.WriteFileText(CustomPaths.Temp, list.ToArray());
             }
         }
 
@@ -137,7 +137,7 @@ namespace SubtitleManager
                 string subs = string.Join("\r\n",
                     this.SubRipSubs.Select(x => x.Order + "\r\n" + x.Text + "\r\n" + x.Timeline + "\r\n").ToArray());
                 this.WriteFileText(this.CurrentSubPath, subs);
-                this.DeleteFile("./temp.txt");
+                this.DeleteFile(CustomPaths.Temp);
                 AlertService.Alert("SubRipSubs are saved to:" + this.CurrentSubPath, AlertType.Info);
             }
             else
