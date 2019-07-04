@@ -65,7 +65,7 @@ namespace SubtitleManager
             }
             else
             {
-                AlertService.Alert("No subs were loaded!", AlertType.Warning);
+                AlertService.Alert(CustomMessages.NoSubsLoaded, AlertType.Warning);
             }
         }
 
@@ -91,7 +91,7 @@ namespace SubtitleManager
         {
             if (!this.SubsAreLoaded)
             {
-                AlertService.Alert("No subs loaded!", AlertType.Alert);
+                AlertService.Alert(CustomMessages.NoSubsLoaded, AlertType.Alert);
                 return false;
             }
 

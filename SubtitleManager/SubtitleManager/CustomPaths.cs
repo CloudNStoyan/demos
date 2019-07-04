@@ -10,4 +10,9 @@ namespace SubtitleManager
     {
         public const string Temp = "./temp.txt";
     }
+
+    public static class CustomMessages
+    {
+        public const string NoSubsLoaded = "No subs loaded!";
+    }
 }
