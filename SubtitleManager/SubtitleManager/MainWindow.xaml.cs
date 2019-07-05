@@ -45,18 +45,18 @@ namespace SubtitleManager
             {
                 this.CurrentSubPath = dialog.FileName;
                 this.FileData = this.ReadFileText(this.CurrentSubPath);
-                switch (Path.GetExtension(this.CurrentSubPath))
+
+                if (Path.GetExtension(this.CurrentSubPath) == ".srt")
                 {
-                    case ".srt":
-                        this.SubRipSubs = this.ParseSrt(this.FileData.Split('\n'));
-                        this.SubCount.Text = this.SubRipSubs.Length.ToString();
-                        this.LoadedSubtitleType = SubtitleType.SubRip;
-                        break;
-                    case ".ass":
-                        this.Aegisubs = this.ParseAss(this.FileData.Split('\n'));
-                        this.SubCount.Text = this.Aegisubs.Length.ToString();
-                        this.LoadedSubtitleType = SubtitleType.Aegisub;
-                        break;
+                    this.SubRipSubs = this.ParseSrt(this.FileData.Split('\n'));
+                    this.SubCount.Text = this.SubRipSubs.Length.ToString();
+                    this.LoadedSubtitleType = SubtitleType.SubRip;
+                }
+                else if (Path.GetExtension(this.CurrentSubPath) == ".ass")
+                {
+                    this.Aegisubs = this.ParseAss(this.FileData.Split('\n'));
+                    this.SubCount.Text = this.Aegisubs.Length.ToString();
+                    this.LoadedSubtitleType = SubtitleType.Aegisub;
                 }
 
                 this.FillSub();
@@ -142,7 +142,7 @@ namespace SubtitleManager
             }
             else
             {
-                AlertService.Alert("You need to load subs first!", AlertType.Alert);
+                AlertService.Alert(CustomMessages.NoSubsLoaded, AlertType.Alert);
             }
         }
 
