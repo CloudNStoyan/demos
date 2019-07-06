@@ -14,5 +14,6 @@ namespace SubtitleManager
     public static class CustomMessages
     {
         public const string NoSubsLoaded = "No subs loaded!";
+        public const string LoadedFromLastUse = "Subs loaded from last use!";
     }
 }

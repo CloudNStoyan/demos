@@ -29,7 +29,7 @@ namespace SubtitleManager
                 this.FileData = this.ReadFileText(CustomPaths.Temp);
                 this.CurrentSubPath = this.FileData.Split('\n')[0];
                 this.SubRipSubs = this.ParseSrt(this.FileData.Split('\n').Skip(1).ToArray());
-                AlertService.Alert("Loaded subs from last use.", AlertType.Info);
+                AlertService.Alert(CustomMessages.LoadedFromLastUse, AlertType.Info);
             }
         }
 
