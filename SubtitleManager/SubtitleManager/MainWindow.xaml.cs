@@ -138,7 +138,7 @@ namespace SubtitleManager
                     this.SubRipSubs.Select(x => x.Order + "\r\n" + x.Text + "\r\n" + x.Timeline + "\r\n").ToArray());
                 this.WriteFileText(this.CurrentSubPath, subs);
                 this.DeleteFile(CustomPaths.Temp);
-                AlertService.Alert("SubRipSubs are saved to:" + this.CurrentSubPath, AlertType.Info);
+                AlertService.Alert(CustomMessages.SubsAreSavedTo + this.CurrentSubPath, AlertType.Info);
             }
             else
             {

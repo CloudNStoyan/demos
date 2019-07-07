@@ -15,5 +15,6 @@ namespace SubtitleManager
     {
         public const string NoSubsLoaded = "No subs loaded!";
         public const string LoadedFromLastUse = "Subs loaded from last use!";
+        public const string SubsAreSavedTo = "SubRipSubs are saved to:";
     }
 }
