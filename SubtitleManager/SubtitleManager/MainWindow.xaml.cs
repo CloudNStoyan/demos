@@ -101,7 +101,7 @@ namespace SubtitleManager
                 return true;
             }
 
-            AlertService.Alert("No more subs", AlertType.Info);
+            AlertService.Alert(CustomMessages.NoMoreSubs, AlertType.Info);
             return false;
         }
 
