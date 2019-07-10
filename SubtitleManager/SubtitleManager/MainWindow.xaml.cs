@@ -124,8 +124,8 @@ namespace SubtitleManager
             if (this.SubRipSubs != null && this.SubRipSubs.Length > 0)
             {
                 this.SubRipSubs[this.CurrentSub].Text = this.SubtitleArea.Text;
-                var list = new List<string> {"#" + this.CurrentSubPath + "\r\n"};
-                list.AddRange(this.SubRipSubs.Select(x => x.Order + "\r\n" + x.Text + "\r\n" + x.Timeline));
+                var list = new List<string> {"#" + this.CurrentSubPath + Environment.NewLine };
+                list.AddRange(this.SubRipSubs.Select(x => x.Order + Environment.NewLine + x.Text + Environment.NewLine + x.Timeline));
                 this.WriteFileText(CustomPaths.Temp, list.ToArray());
             }
         }
@@ -134,8 +134,8 @@ namespace SubtitleManager
         {
             if (this.SubsAreLoaded)
             {
-                string subs = string.Join("\r\n",
-                    this.SubRipSubs.Select(x => x.Order + "\r\n" + x.Text + "\r\n" + x.Timeline + "\r\n").ToArray());
+                string subs = string.Join(Environment.NewLine,
+                    this.SubRipSubs.Select(x => x.Order + Environment.NewLine + x.Text + Environment.NewLine + x.Timeline + Environment.NewLine).ToArray());
                 this.WriteFileText(this.CurrentSubPath, subs);
                 this.DeleteFile(CustomPaths.Temp);
                 AlertService.Alert(this.LoadedSubtitleType + CustomMessages.SubsAreSavedTo + this.CurrentSubPath, AlertType.Info);
