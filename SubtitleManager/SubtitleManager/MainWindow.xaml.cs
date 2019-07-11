@@ -37,8 +37,8 @@ namespace SubtitleManager
         {
             var dialog = new OpenFileDialog
             {
-                DefaultExt = ".srt|.sub",
-                Filter = "SubRip Files (*.srt)|*.srt|Sub Files (*.sub)|*.sub|Aegisub Files (*.ass)|*.ass"
+                DefaultExt = CustomFilter.Extensions,
+                Filter = CustomFilter.Subs
             };
 
             if (dialog.ShowDialog() == true)
