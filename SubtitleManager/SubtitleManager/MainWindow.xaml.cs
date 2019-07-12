@@ -46,13 +46,13 @@ namespace SubtitleManager
                 this.CurrentSubPath = dialog.FileName;
                 this.FileData = this.ReadFileText(this.CurrentSubPath);
 
-                if (Path.GetExtension(this.CurrentSubPath) == ".srt")
+                if (Path.GetExtension(this.CurrentSubPath) == CustomExtension.Srt)
                 {
                     this.SubRipSubs = this.ParseSrt(this.FileData.Split('\n'));
                     this.SubCount.Text = this.SubRipSubs.Length.ToString();
                     this.LoadedSubtitleType = SubtitleType.SubRip;
                 }
-                else if (Path.GetExtension(this.CurrentSubPath) == ".ass")
+                else if (Path.GetExtension(this.CurrentSubPath) == CustomExtension.Ass)
                 {
                     this.Aegisubs = this.ParseAss(this.FileData.Split('\n'));
                     this.SubCount.Text = this.Aegisubs.Length.ToString();
