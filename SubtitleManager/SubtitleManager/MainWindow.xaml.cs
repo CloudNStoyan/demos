@@ -27,8 +27,8 @@ namespace SubtitleManager
             if (File.Exists(CustomPaths.Temp))
             {
                 this.FileData = this.ReadFileText(CustomPaths.Temp);
-                this.CurrentSubPath = this.FileData.Split('\n')[0];
-                this.SubRipSubs = this.ParseSrt(this.FileData.Split('\n').Skip(1).ToArray());
+                this.CurrentSubPath = this.FileData.Split(new[] { Environment.NewLine }, StringSplitOptions.None)[0];
+                this.SubRipSubs = this.ParseSrt(this.FileData.Split(new[] { Environment.NewLine }, StringSplitOptions.None).Skip(1).ToArray());
                 AlertService.Alert(CustomMessages.LoadedFromLastUse, AlertType.Info);
             }
         }
@@ -48,13 +48,13 @@ namespace SubtitleManager
 
                 if (Path.GetExtension(this.CurrentSubPath) == CustomExtension.Srt)
                 {
-                    this.SubRipSubs = this.ParseSrt(this.FileData.Split('\n'));
+                    this.SubRipSubs = this.ParseSrt(this.FileData.Split(new[]{Environment.NewLine}, StringSplitOptions.None));
                     this.SubCount.Text = this.SubRipSubs.Length.ToString();
                     this.LoadedSubtitleType = SubtitleType.SubRip;
                 }
                 else if (Path.GetExtension(this.CurrentSubPath) == CustomExtension.Ass)
                 {
-                    this.Aegisubs = this.ParseAss(this.FileData.Split('\n'));
+                    this.Aegisubs = this.ParseAss(this.FileData.Split(new[] { Environment.NewLine }, StringSplitOptions.None));
                     this.SubCount.Text = this.Aegisubs.Length.ToString();
                     this.LoadedSubtitleType = SubtitleType.Aegisub;
                 }
