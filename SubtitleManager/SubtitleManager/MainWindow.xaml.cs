@@ -27,7 +27,7 @@ namespace SubtitleManager
             if (File.Exists(CustomPaths.Temp))
             {
                 this.FileData = this.ReadFileText(CustomPaths.Temp);
-                this.CurrentSubPath = this.FileData.Split(new[] { Environment.NewLine }, StringSplitOptions.None)[0];
+                this.CurrentSubPath = this.FileData.Split(new[] { Environment.NewLine }, StringSplitOptions.None).First();
                 this.SubRipSubs = this.ParseSrt(this.FileData.Split(new[] { Environment.NewLine }, StringSplitOptions.None).Skip(1).ToArray());
                 AlertService.Alert(CustomMessages.LoadedFromLastUse, AlertType.Info);
             }
