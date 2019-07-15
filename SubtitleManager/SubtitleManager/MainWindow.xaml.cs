@@ -46,17 +46,18 @@ namespace SubtitleManager
                 this.CurrentSubPath = dialog.FileName;
                 this.FileData = this.ReadFileText(this.CurrentSubPath);
 
-                if (Path.GetExtension(this.CurrentSubPath) == CustomExtension.Srt)
+                switch (Path.GetExtension(this.CurrentSubPath))
                 {
-                    this.SubRipSubs = this.ParseSrt(this.FileData.Split(new[]{Environment.NewLine}, StringSplitOptions.None));
-                    this.SubCount.Text = this.SubRipSubs.Length.ToString();
-                    this.LoadedSubtitleType = SubtitleType.SubRip;
-                }
-                else if (Path.GetExtension(this.CurrentSubPath) == CustomExtension.Ass)
-                {
-                    this.Aegisubs = this.ParseAss(this.FileData.Split(new[] { Environment.NewLine }, StringSplitOptions.None));
-                    this.SubCount.Text = this.Aegisubs.Length.ToString();
-                    this.LoadedSubtitleType = SubtitleType.Aegisub;
+                    case CustomExtension.Srt:
+                        this.SubRipSubs = this.ParseSrt(this.FileData.Split(new[] { Environment.NewLine }, StringSplitOptions.None));
+                        this.SubCount.Text = this.SubRipSubs.Length.ToString();
+                        this.LoadedSubtitleType = SubtitleType.SubRip;
+                        break;
+                    case CustomExtension.Ass:
+                        this.Aegisubs = this.ParseAss(this.FileData.Split(new[] { Environment.NewLine }, StringSplitOptions.None));
+                        this.SubCount.Text = this.Aegisubs.Length.ToString();
+                        this.LoadedSubtitleType = SubtitleType.Aegisub;
+                        break;
                 }
 
                 this.FillSub();
