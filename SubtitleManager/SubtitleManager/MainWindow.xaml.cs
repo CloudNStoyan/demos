@@ -122,7 +122,7 @@ namespace SubtitleManager
 
         private void EditSub(object s, EventArgs e)
         {
-            if (this.SubRipSubs != null && this.SubRipSubs.Length > 0)
+            if (this.LoadedSubtitleType == SubtitleType.SubRip && this.SubRipSubs != null && this.SubRipSubs.Length > 0)
             {
                 this.SubRipSubs[this.CurrentSub].Text = this.SubtitleArea.Text;
                 var list = new List<string> {"#" + this.CurrentSubPath + Environment.NewLine };
