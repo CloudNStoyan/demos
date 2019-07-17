@@ -49,7 +49,9 @@ namespace SubtitleManager
                 switch (Path.GetExtension(this.CurrentSubPath))
                 {
                     case CustomExtension.Srt:
-                        this.SubRipSubs = this.ParseSrt(this.FileData.Split(new[] { Environment.NewLine }, StringSplitOptions.None));
+                        string[] splitedFileData =
+                            this.FileData.Split(new[] {Environment.NewLine}, StringSplitOptions.None);
+                        this.SubRipSubs = this.ParseSrt(splitedFileData[0].StartsWith("#") ? splitedFileData.Skip(1).ToArray() : splitedFileData);
                         this.SubCount.Text = this.SubRipSubs.Length.ToString();
                         this.LoadedSubtitleType = SubtitleType.SubRip;
                         break;
