@@ -50,13 +50,13 @@ namespace SubtitleManager
                 {
                     case CustomExtension.Srt:
                         string[] splitedFileData =
-                            this.FileData.Split(new[] {Environment.NewLine}, StringSplitOptions.None);
+                            this.FileData.Split(new[] {CustomString.NewLine}, StringSplitOptions.None);
                         this.SubRipSubs = this.ParseSrt(splitedFileData[0].StartsWith("#") ? splitedFileData.Skip(1).ToArray() : splitedFileData);
                         this.SubCount.Text = this.SubRipSubs.Length.ToString();
                         this.LoadedSubtitleType = SubtitleType.SubRip;
                         break;
                     case CustomExtension.Ass:
-                        this.Aegisubs = this.ParseAss(this.FileData.Split(new[] { Environment.NewLine }, StringSplitOptions.None));
+                        this.Aegisubs = this.ParseAss(this.FileData.Split(new[] { CustomString.NewLine }, StringSplitOptions.None));
                         this.SubCount.Text = this.Aegisubs.Length.ToString();
                         this.LoadedSubtitleType = SubtitleType.Aegisub;
                         break;
