@@ -197,7 +197,7 @@ namespace SubtitleManager
                 AlertService.Alert(e.Message, AlertType.Warning);
             }
 
-            return "";
+            return string.Empty;
         }
 
         private void WriteFileText(string path, string content)
@@ -234,6 +234,11 @@ namespace SubtitleManager
             {
                 AlertService.Alert(e.Message, AlertType.Warning);
             }
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            this.DeleteFile("./temp.txt");
         }
     }
 }
