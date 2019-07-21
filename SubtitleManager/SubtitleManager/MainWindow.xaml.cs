@@ -236,9 +236,10 @@ namespace SubtitleManager
             }
         }
 
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        private void DeleteTemp(object sender, RoutedEventArgs e)
         {
-            this.DeleteFile("./temp.txt");
+            this.DeleteFile(CustomPaths.Temp);
+            AlertService.Alert("Last temp file deleted.", AlertType.Info);
         }
     }
 }

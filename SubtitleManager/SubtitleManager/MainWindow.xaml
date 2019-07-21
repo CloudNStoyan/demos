@@ -15,6 +15,6 @@
         <TextBlock HorizontalAlignment="Left" Margin="10,107,0,0" TextWrapping="Wrap" Text="00:00:00" VerticalAlignment="Top" Name="Timestamp"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,128,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Name="Order"/>
         <TextBlock HorizontalAlignment="Left" Height="23" Margin="10,149,0,0" TextWrapping="Wrap" Text="Sub Count" VerticalAlignment="Top" Width="83" Name="SubCount"/>
-        <Button Content="Delete Temp" HorizontalAlignment="Left" Margin="358,113,0,0" VerticalAlignment="Top" Width="75" Click="ButtonBase_OnClick"/>
+        <Button Content="Delete Temp" HorizontalAlignment="Left" Margin="358,113,0,0" VerticalAlignment="Top" Width="75" Click="DeleteTemp"/>
     </Grid>
 </Window>
