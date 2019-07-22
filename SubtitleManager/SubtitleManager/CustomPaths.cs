@@ -17,6 +17,7 @@ namespace SubtitleManager
         public const string LoadedFromLastUse = "Subs loaded from last use!";
         public const string SubsAreSavedTo = " are saved to:";
         public const string NoMoreSubs = "No more subs";
+        public const string TempDeleted = "Last temp file deleted.";
     }
 
     public static class CustomFilter

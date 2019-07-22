@@ -239,7 +239,7 @@ namespace SubtitleManager
         private void DeleteTemp(object sender, RoutedEventArgs e)
         {
             this.DeleteFile(CustomPaths.Temp);
-            AlertService.Alert("Last temp file deleted.", AlertType.Info);
+            AlertService.Alert(CustomMessages.TempDeleted, AlertType.Info);
         }
     }
 }
