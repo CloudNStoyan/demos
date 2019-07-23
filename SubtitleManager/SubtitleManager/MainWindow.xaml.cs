@@ -172,7 +172,7 @@ namespace SubtitleManager
 
             foreach (string[] srtTemplate in list)
             {
-                if (srtTemplate.Length > 2)
+                if (srtTemplate.Length > 2 && int.TryParse(srtTemplate[0], out int result))
                 {
                     srtList.Add(SubRip.Parse(srtTemplate));
                 }
