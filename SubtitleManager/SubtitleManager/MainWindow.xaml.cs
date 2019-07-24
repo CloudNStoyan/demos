@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using Microsoft.Win32;
 
@@ -26,7 +25,7 @@ namespace SubtitleManager
             this.InitializeComponent();
             if (File.Exists(CustomPaths.Temp))
             {
-                this.FileData = this.ReadFileText(CustomPaths.Temp);
+                this.FileData = FileManager.ReadFileText(CustomPaths.Temp);
                 this.CurrentSubPath = this.FileData.Split(new[] { Environment.NewLine }, StringSplitOptions.None).First();
                 this.SubRipSubs = this.ParseSrt(this.FileData.Split(new[] { Environment.NewLine }, StringSplitOptions.None).Skip(1).ToArray());
                 AlertService.Alert(CustomMessages.LoadedFromLastUse, AlertType.Info);
@@ -44,7 +43,7 @@ namespace SubtitleManager
             if (dialog.ShowDialog() == true)
             {
                 this.CurrentSubPath = dialog.FileName;
-                this.FileData = this.ReadFileText(this.CurrentSubPath);
+                this.FileData = FileManager.ReadFileText(this.CurrentSubPath);
 
                 switch (Path.GetExtension(this.CurrentSubPath))
                 {
@@ -129,7 +128,7 @@ namespace SubtitleManager
                 this.SubRipSubs[this.CurrentSub].Text = this.SubtitleArea.Text;
                 var list = new List<string> {"#" + this.CurrentSubPath + Environment.NewLine };
                 list.AddRange(this.SubRipSubs.Select(x => x.Order + Environment.NewLine + x.Text + Environment.NewLine + x.Timeline));
-                this.WriteFileText(CustomPaths.Temp, list.ToArray());
+                FileManager.WriteFileText(CustomPaths.Temp, list.ToArray());
             }
         }
 
@@ -139,8 +138,8 @@ namespace SubtitleManager
             {
                 string subs = string.Join(Environment.NewLine,
                     this.SubRipSubs.Select(x => x.Order + Environment.NewLine + x.Text + Environment.NewLine + x.Timeline + Environment.NewLine).ToArray());
-                this.WriteFileText(this.CurrentSubPath, subs);
-                this.DeleteFile(CustomPaths.Temp);
+                FileManager.WriteFileText(this.CurrentSubPath, subs);
+                FileManager.DeleteFile(CustomPaths.Temp);
                 AlertService.Alert(this.LoadedSubtitleType + CustomMessages.SubsAreSavedTo + this.CurrentSubPath, AlertType.Info);
             }
             else
@@ -186,59 +185,9 @@ namespace SubtitleManager
             return new Aegisub[1];
         }
 
-        private string ReadFileText(string path)
-        {
-            try
-            {
-                return File.ReadAllText(path, Encoding.Default);
-            }
-            catch (Exception e)
-            {
-                AlertService.Alert(e.Message, AlertType.Warning);
-            }
-
-            return string.Empty;
-        }
-
-        private void WriteFileText(string path, string content)
-        {
-            try
-            {
-                File.WriteAllText(path, content, Encoding.Default);
-            }
-            catch (Exception e)
-            {
-                AlertService.Alert(e.Message, AlertType.Warning);
-            }
-        }
-
-        private void WriteFileText(string path, string[] content)
-        {
-            try
-            {
-                File.WriteAllLines(path, content, Encoding.Default);
-            }
-            catch (Exception e)
-            {
-                AlertService.Alert(e.Message, AlertType.Warning);
-            }
-        }
-
-        private void DeleteFile(string path)
-        {
-            try
-            {
-                File.Delete(path);
-            }
-            catch (Exception e)
-            {
-                AlertService.Alert(e.Message, AlertType.Warning);
-            }
-        }
-
         private void DeleteTemp(object sender, RoutedEventArgs e)
         {
-            this.DeleteFile(CustomPaths.Temp);
+            FileManager.DeleteFile(CustomPaths.Temp);
             AlertService.Alert(CustomMessages.TempDeleted, AlertType.Info);
         }
     }
