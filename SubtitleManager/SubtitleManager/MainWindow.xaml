@@ -5,16 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SubtitleManager"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="210" Width="457">
     <Grid>
         <TextBox HorizontalAlignment="Left" Height="92" Margin="10,10,0,0" TextWrapping="Wrap" Text="Subtitles..." VerticalAlignment="Top" Width="343" Name="SubtitleArea" TextChanged="EditSub"/>
         <Button Content="Next" HorizontalAlignment="Left" Margin="358,10,0,0" VerticalAlignment="Top" Width="75" Click="NextSub"/>
         <Button Content="Previous" HorizontalAlignment="Left" Margin="358,35,0,0" VerticalAlignment="Top" Width="75" Click="PreviousSub"/>
         <Button Content="Browse" HorizontalAlignment="Left" Margin="358,82,0,0" VerticalAlignment="Top" Width="75" Click="BrowseSubs"/>
-        <Button Content="Save" HorizontalAlignment="Left" Margin="10,177,0,0" VerticalAlignment="Top" Width="75" Click="SaveSubs"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,107,0,0" TextWrapping="Wrap" Text="00:00:00" VerticalAlignment="Top" Name="Timestamp"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,128,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Name="Order"/>
-        <TextBlock HorizontalAlignment="Left" Height="23" Margin="10,149,0,0" TextWrapping="Wrap" Text="Sub Count" VerticalAlignment="Top" Width="83" Name="SubCount"/>
+        <Button Content="Save Subs" HorizontalAlignment="Left" Margin="358,138,0,0" VerticalAlignment="Top" Width="75" Click="SaveSubs"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,107,0,0" TextWrapping="Wrap" Text="Timestamp: NaN" VerticalAlignment="Top" Name="Timestamp"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,128,0,0" TextWrapping="Wrap" Text="Order: NaN" VerticalAlignment="Top" Name="Order"/>
+        <TextBlock HorizontalAlignment="Left" Height="23" Margin="10,149,0,0" TextWrapping="Wrap" Text="Sub Count: NaN" VerticalAlignment="Top" Width="88" Name="SubCount"/>
         <Button Content="Delete Temp" HorizontalAlignment="Left" Margin="358,113,0,0" VerticalAlignment="Top" Width="75" Click="DeleteTemp"/>
     </Grid>
 </Window>
