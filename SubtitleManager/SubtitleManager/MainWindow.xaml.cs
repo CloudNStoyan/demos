@@ -23,6 +23,11 @@ namespace SubtitleManager
         public MainWindow() 
         {
             this.InitializeComponent();
+            this.LoadLast();
+        }
+
+        private void LoadLast()
+        {
             if (File.Exists(CustomPaths.Temp))
             {
                 this.FileData = FileManager.ReadFileText(CustomPaths.Temp);
@@ -109,15 +114,11 @@ namespace SubtitleManager
 
         private void FillSub()
         {
-            switch (this.LoadedSubtitleType)
+            if (this.LoadedSubtitleType == SubtitleType.SubRip)
             {
-                case SubtitleType.SubRip:
-                    this.SubtitleArea.Text = this.SubRipSubs[this.CurrentSub].Text;
-                    this.Timestamp.Text = "Timestamp: " + this.SubRipSubs[this.CurrentSub].Timeline;
-                    this.Order.Text = "Order: " + this.SubRipSubs[this.CurrentSub].Order.ToString();
-                    break;
-                default:
-                    break;
+                this.SubtitleArea.Text = this.SubRipSubs[this.CurrentSub].Text;
+                this.Timestamp.Text = "Timestamp: " + this.SubRipSubs[this.CurrentSub].Timeline;
+                this.Order.Text = "Order: " + this.SubRipSubs[this.CurrentSub].Order.ToString();
             }
         }
 
