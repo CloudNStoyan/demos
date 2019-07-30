@@ -12,9 +12,9 @@
         public const string SubsAreSavedTo = " are saved to:";
         public const string NoMoreSubs = "No more subs";
         public const string TempDeleted = "Last temp file deleted.";
-        public const string TimestampIs = "Timestamp is: ";
-        public const string OrderIs = "Order is: ";
-        public const string SubcountIs = "Sub count is: ";
+        public const string Timestamp = "Timestamp is: ";
+        public const string Order = "Order is: ";
+        public const string Subcount = "Sub count is: ";
     }
 
     public static class CustomFilter

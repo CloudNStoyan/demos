@@ -56,7 +56,7 @@ namespace SubtitleManager
                         string[] splitedFileData =
                             this.FileData.Split(new[] { CustomString.NewLine }, StringSplitOptions.None);
                         this.SubRipSubs = this.ParseSrt(splitedFileData[0].StartsWith("#") ? splitedFileData.Skip(1).ToArray() : splitedFileData);
-                        this.SubCount.Text = CustomMessages.SubcountIs + this.SubRipSubs.Length;
+                        this.SubCount.Text = CustomMessages.Subcount + this.SubRipSubs.Length;
                         this.LoadedSubtitleType = SubtitleType.SubRip;
                         break;
                     case CustomExtension.Ass:
@@ -117,8 +117,8 @@ namespace SubtitleManager
             if (this.LoadedSubtitleType == SubtitleType.SubRip)
             {
                 this.SubtitleArea.Text = this.SubRipSubs[this.CurrentSub].Text;
-                this.Timestamp.Text = CustomMessages.TimestampIs + this.SubRipSubs[this.CurrentSub].Timeline;
-                this.Order.Text = CustomMessages.OrderIs + this.SubRipSubs[this.CurrentSub].Order;
+                this.Timestamp.Text = CustomMessages.Timestamp + this.SubRipSubs[this.CurrentSub].Timeline;
+                this.Order.Text = CustomMessages.Order + this.SubRipSubs[this.CurrentSub].Order;
             }
         }
 
