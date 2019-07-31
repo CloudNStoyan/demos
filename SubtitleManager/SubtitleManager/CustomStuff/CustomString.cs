@@ -1,4 +1,4 @@
-﻿namespace SubtitleManager
+﻿namespace SubtitleManager.CustomStuff
 {
     public static class CustomString
     {

@@ -57,8 +57,11 @@
     </ApplicationDefinition>
     <Compile Include="Aegisub.cs" />
     <Compile Include="Alert.cs" />
-    <Compile Include="CustomPaths.cs" />
-    <Compile Include="CustomString.cs" />
+    <Compile Include="CustomStuff\CustomExtension.cs" />
+    <Compile Include="CustomStuff\CustomFilter.cs" />
+    <Compile Include="CustomStuff\CustomMessages.cs" />
+    <Compile Include="CustomStuff\CustomPaths.cs" />
+    <Compile Include="CustomStuff\CustomString.cs" />
     <Compile Include="FileManager.cs" />
     <Compile Include="Srt.cs" />
     <Compile Include="SubtitleType.cs" />
