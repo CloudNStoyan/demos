@@ -1,4 +1,4 @@
-﻿namespace SubtitleManager
+﻿namespace SubtitleManager.SubtitleTypes
 {
     class SubRip
     {

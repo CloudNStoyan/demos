@@ -55,7 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Aegisub.cs" />
+    <Compile Include="SubtitleTypes\Aegisub.cs" />
     <Compile Include="Alert.cs" />
     <Compile Include="CustomStuff\CustomExtension.cs" />
     <Compile Include="CustomStuff\CustomFilter.cs" />
@@ -63,8 +63,8 @@
     <Compile Include="CustomStuff\CustomPaths.cs" />
     <Compile Include="CustomStuff\CustomString.cs" />
     <Compile Include="FileManager.cs" />
-    <Compile Include="Srt.cs" />
-    <Compile Include="SubtitleType.cs" />
+    <Compile Include="SubtitleTypes\Srt.cs" />
+    <Compile Include="SubtitleTypes\SubtitleType.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows;
 using Microsoft.Win32;
 using SubtitleManager.CustomStuff;
+using SubtitleManager.SubtitleTypes;
 
 namespace SubtitleManager
 {
