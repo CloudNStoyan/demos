@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace SubtitleManager
+namespace SubtitleManager.Services
 {
     public enum AlertType
     {
