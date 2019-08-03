@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
 using Microsoft.Win32;
 using SubtitleManager.CustomStuff;
@@ -154,6 +155,10 @@ namespace SubtitleManager
 
         private SubRip[] ParseSrt(string[] srtTextLines)
         {
+            string regex = @"(?<number>\d+)\r\n(?<start>\S+)\s-->\s(?<end>\S+)\r\n(?<text>(.|[\r\n])+?)\r\n\r\n";
+
+            var matches = Regex.Matches(string.Join("\r\n", srtTextLines), regex);
+
             var list = new List<string[]>();
 
             var tempList = new List<string>();
