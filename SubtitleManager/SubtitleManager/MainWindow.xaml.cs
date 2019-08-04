@@ -158,6 +158,12 @@ namespace SubtitleManager
             string regex = @"(?<number>\d+)\r\n(?<start>\S+)\s-->\s(?<end>\S+)\r\n(?<text>(.|[\r\n])+?)\r\n\r\n";
 
             var matches = Regex.Matches(string.Join("\r\n", srtTextLines), regex);
+            var subs = new List<string>();
+
+            foreach (Match match in matches)
+            {
+                subs.Add(match.Value);
+            }
 
             var list = new List<string[]>();
 
