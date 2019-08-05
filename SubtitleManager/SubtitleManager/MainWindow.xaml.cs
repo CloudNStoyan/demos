@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
 using Microsoft.Win32;
@@ -36,7 +37,7 @@ namespace SubtitleManager
             {
                 this.FileData = FileManager.ReadFileText(CustomPaths.Temp);
                 this.CurrentSubPath = this.FileData.Split(new[] { Environment.NewLine }, StringSplitOptions.None).First();
-                this.SubRipSubs = this.ParseSrt(this.FileData.Split(new[] { Environment.NewLine }, StringSplitOptions.None).Skip(1).ToArray());
+                this.SubRipSubs = this.ParseSrt(this.FileData);
                 AlertService.Alert(CustomMessages.LoadedFromLastUse, AlertType.Info);
             }
         }
@@ -59,7 +60,7 @@ namespace SubtitleManager
                     case CustomExtension.Srt:
                         string[] splitedFileData =
                             this.FileData.Split(new[] { CustomString.NewLine }, StringSplitOptions.None);
-                        this.SubRipSubs = this.ParseSrt(splitedFileData[0].StartsWith("#") ? splitedFileData.Skip(1).ToArray() : splitedFileData);
+                        this.SubRipSubs = this.ParseSrt(this.FileData);
                         this.SubCount.Text = CustomMessages.Subcount + this.SubRipSubs.Length;
                         this.LoadedSubtitleType = SubtitleType.SubRip;
                         break;
@@ -153,8 +154,23 @@ namespace SubtitleManager
             }
         }
 
-        private SubRip[] ParseSrt(string[] srtTextLines)
+        private SubRip[] ParseSrt(string srtRawText)
         {
+            string[] srtTextLines = srtRawText.Split(new []{CustomString.NewLine}, StringSplitOptions.None);
+            string strRegex = @"(?<Order>\d+)\r\n(?<StartTime>(\d\d:){2}\d\d,\d{3}) --> (?<EndTime>(\d\d:){2}\d\d,\d{3})\r\n(?<Sub>.+)(?=\r\n\r\n\d+|$)";
+            Regex myRegex = new Regex(strRegex, RegexOptions.Singleline);
+
+            foreach (Match myMatch in myRegex.Matches(srtRawText))
+            {
+                if (myMatch.Success)
+                {
+                    string a = myMatch.Groups["Order"].Value;
+                    string b = myMatch.Groups["StartTime"].Value;
+                    string c = myMatch.Groups["EndTime"].Value;
+                    string d = myMatch.Groups["Sub"].Value;
+                }
+            }
+
             string regex = @"(?<number>\d+)\r\n(?<start>\S+)\s-->\s(?<end>\S+)\r\n(?<text>(.|[\r\n])+?)\r\n\r\n";
 
             var matches = Regex.Matches(string.Join("\r\n", srtTextLines), regex);
