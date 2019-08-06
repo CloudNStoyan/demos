@@ -158,16 +158,16 @@ namespace SubtitleManager
         {
             string[] srtTextLines = srtRawText.Split(new []{CustomString.NewLine}, StringSplitOptions.None);
             string strRegex = @"(?<Order>\d+)\r\n(?<StartTime>(\d\d:){2}\d\d,\d{3}) --> (?<EndTime>(\d\d:){2}\d\d,\d{3})\r\n(?<Sub>.+)(?=\r\n\r\n\d+|$)";
-            Regex myRegex = new Regex(strRegex, RegexOptions.Singleline);
+            Regex myRegex = new Regex(strRegex, RegexOptions.Multiline);
 
             foreach (Match myMatch in myRegex.Matches(srtRawText))
             {
                 if (myMatch.Success)
                 {
-                    string a = myMatch.Groups["Order"].Value;
-                    string b = myMatch.Groups["StartTime"].Value;
-                    string c = myMatch.Groups["EndTime"].Value;
-                    string d = myMatch.Groups["Sub"].Value;
+                    int order = int.Parse(myMatch.Groups["Order"].Value);
+                    string startTime = myMatch.Groups["StartTime"].Value;
+                    string endTime = myMatch.Groups["EndTime"].Value;
+                    string subtitleText = myMatch.Groups["Sub"].Value;
                 }
             }
 
