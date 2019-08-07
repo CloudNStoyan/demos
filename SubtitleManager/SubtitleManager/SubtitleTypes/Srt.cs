@@ -3,16 +3,18 @@
     class SubRip
     {
         public int Order { get; set; }
-        public string Timeline { get; set; }
+        public string StartTime { get; set; }
+        public string EndTime { get; set; }
         public string Text { get; set; }
 
-        public static SubRip Parse(string[] srtTemplate)
+        public static SubRip Parse(int order, string startTime, string endTime, string text)
         {
             return new SubRip
             {
-                Order = int.Parse(srtTemplate[0]),
-                Timeline = srtTemplate[1],
-                Text = srtTemplate[2]
+                Order = order,
+                StartTime = startTime,
+                EndTime = endTime,
+                Text = text
             };
         }
     }

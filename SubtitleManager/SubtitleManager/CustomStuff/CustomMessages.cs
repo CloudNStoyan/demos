@@ -7,7 +7,8 @@
         public const string SubsAreSavedTo = " are saved to:";
         public const string NoMoreSubs = "No more subs";
         public const string TempDeleted = "Last temp file deleted.";
-        public const string Timestamp = "Timestamp is: ";
+        public const string StartTime = "StartTime is: ";
+        public const string EndTime = "EndTime is: ";
         public const string Order = "Order is: ";
         public const string Subcount = "Sub count is: ";
     }

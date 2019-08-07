@@ -122,7 +122,8 @@ namespace SubtitleManager
             if (this.LoadedSubtitleType == SubtitleType.SubRip)
             {
                 this.SubtitleArea.Text = this.SubRipSubs[this.CurrentSub].Text;
-                this.Timestamp.Text = CustomMessages.Timestamp + this.SubRipSubs[this.CurrentSub].Timeline;
+                this.StartTime.Text = CustomMessages.StartTime + this.SubRipSubs[this.CurrentSub].StartTime;
+                this.EndTime.Text = CustomMessages.EndTime + this.SubRipSubs[this.CurrentSub].EndTime;
                 this.Order.Text = CustomMessages.Order + this.SubRipSubs[this.CurrentSub].Order;
             }
         }
@@ -133,7 +134,7 @@ namespace SubtitleManager
             {
                 this.SubRipSubs[this.CurrentSub].Text = this.SubtitleArea.Text;
                 var list = new List<string> {"#" + this.CurrentSubPath + Environment.NewLine };
-                list.AddRange(this.SubRipSubs.Select(x => x.Order + Environment.NewLine + x.Text + Environment.NewLine + x.Timeline));
+                list.AddRange(this.SubRipSubs.Select(x => x.Order + Environment.NewLine + x.Text + Environment.NewLine + x.StartTime + "-->" + x.EndTime));
                 FileManager.WriteFileText(CustomPaths.Temp, list.ToArray());
             }
         }
@@ -143,7 +144,7 @@ namespace SubtitleManager
             if (this.SubsAreLoaded)
             {
                 string subs = string.Join(Environment.NewLine,
-                    this.SubRipSubs.Select(x => x.Order + Environment.NewLine + x.Text + Environment.NewLine + x.Timeline + Environment.NewLine).ToArray());
+                    this.SubRipSubs.Select(x => x.Order + Environment.NewLine + x.Text + Environment.NewLine + x.StartTime + "-->" + x.EndTime + Environment.NewLine).ToArray());
                 FileManager.WriteFileText(this.CurrentSubPath, subs);
                 FileManager.DeleteFile(CustomPaths.Temp);
                 AlertService.Alert(this.LoadedSubtitleType + CustomMessages.SubsAreSavedTo + this.CurrentSubPath, AlertType.Info);
@@ -156,9 +157,10 @@ namespace SubtitleManager
 
         private SubRip[] ParseSrt(string srtRawText)
         {
-            string[] srtTextLines = srtRawText.Split(new []{CustomString.NewLine}, StringSplitOptions.None);
             string strRegex = @"(?<Order>\d+)\r\n(?<StartTime>(\d\d:){2}\d\d,\d{3}) --> (?<EndTime>(\d\d:){2}\d\d,\d{3})\r\n(?<Sub>.+)(?=\r\n\r\n\d+|$)";
-            Regex myRegex = new Regex(strRegex, RegexOptions.Multiline);
+            var myRegex = new Regex(strRegex, RegexOptions.Multiline);
+
+            var srtList = new List<SubRip>();
 
             foreach (Match myMatch in myRegex.Matches(srtRawText))
             {
@@ -168,43 +170,8 @@ namespace SubtitleManager
                     string startTime = myMatch.Groups["StartTime"].Value;
                     string endTime = myMatch.Groups["EndTime"].Value;
                     string subtitleText = myMatch.Groups["Sub"].Value;
-                }
-            }
 
-            string regex = @"(?<number>\d+)\r\n(?<start>\S+)\s-->\s(?<end>\S+)\r\n(?<text>(.|[\r\n])+?)\r\n\r\n";
-
-            var matches = Regex.Matches(string.Join("\r\n", srtTextLines), regex);
-            var subs = new List<string>();
-
-            foreach (Match match in matches)
-            {
-                subs.Add(match.Value);
-            }
-
-            var list = new List<string[]>();
-
-            var tempList = new List<string>();
-
-            foreach (var line in srtTextLines)
-            {
-                if (!string.IsNullOrWhiteSpace(line))
-                {
-                    tempList.Add(line);
-                }
-                else
-                {
-                    list.Add(tempList.ToArray());
-                    tempList = new List<string>();
-                }
-            }
-
-            var srtList = new List<SubRip>();
-
-            foreach (string[] srtTemplate in list)
-            {
-                if (srtTemplate.Length > 2 && int.TryParse(srtTemplate[0], out int result))
-                {
-                    srtList.Add(SubRip.Parse(srtTemplate));
+                    srtList.Add(SubRip.Parse(order, startTime, endTime, subtitleText));
                 }
             }
 
