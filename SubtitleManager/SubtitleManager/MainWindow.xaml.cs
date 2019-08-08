@@ -58,8 +58,6 @@ namespace SubtitleManager
                 switch (Path.GetExtension(this.CurrentSubPath))
                 {
                     case CustomExtension.Srt:
-                        string[] splitedFileData =
-                            this.FileData.Split(new[] { CustomString.NewLine }, StringSplitOptions.None);
                         this.SubRipSubs = this.ParseSrt(this.FileData);
                         this.SubCount.Text = CustomMessages.Subcount + this.SubRipSubs.Length;
                         this.LoadedSubtitleType = SubtitleType.SubRip;
@@ -133,7 +131,8 @@ namespace SubtitleManager
             if (this.LoadedSubtitleType == SubtitleType.SubRip && this.SubRipSubs != null && this.SubRipSubs.Length > 0)
             {
                 this.SubRipSubs[this.CurrentSub].Text = this.SubtitleArea.Text;
-                var list = new List<string> {"#" + this.CurrentSubPath + Environment.NewLine };
+                var list = new List<string>();
+                Properties.Settings.Default["LastSubtitlePath"] = this.CurrentSubPath;
                 list.AddRange(this.SubRipSubs.Select(x => x.Order + Environment.NewLine + x.Text + Environment.NewLine + x.StartTime + "-->" + x.EndTime));
                 FileManager.WriteFileText(CustomPaths.Temp, list.ToArray());
             }
