@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
 using Microsoft.Win32;
@@ -133,7 +132,7 @@ namespace SubtitleManager
                 this.SubRipSubs[this.CurrentSub].Text = this.SubtitleArea.Text;
                 var list = new List<string>();
                 Properties.Settings.Default["LastSubtitlePath"] = this.CurrentSubPath;
-                list.AddRange(this.SubRipSubs.Select(x => x.Order + Environment.NewLine + x.Text + Environment.NewLine + x.StartTime + "-->" + x.EndTime));
+                list.AddRange(this.SubRipSubs.Select(x => x.Order + Environment.NewLine + x.Text + Environment.NewLine + x.StartTime + CustomString.SubtitleTimelineSeperator + x.EndTime));
                 FileManager.WriteFileText(CustomPaths.Temp, list.ToArray());
             }
         }
@@ -143,7 +142,7 @@ namespace SubtitleManager
             if (this.SubsAreLoaded)
             {
                 string subs = string.Join(Environment.NewLine,
-                    this.SubRipSubs.Select(x => x.Order + Environment.NewLine + x.Text + Environment.NewLine + x.StartTime + "-->" + x.EndTime + Environment.NewLine).ToArray());
+                    this.SubRipSubs.Select(x => x.Order + Environment.NewLine + x.Text + Environment.NewLine + x.StartTime + CustomString.SubtitleTimelineSeperator + x.EndTime + Environment.NewLine).ToArray());
                 FileManager.WriteFileText(this.CurrentSubPath, subs);
                 FileManager.DeleteFile(CustomPaths.Temp);
                 AlertService.Alert(this.LoadedSubtitleType + CustomMessages.SubsAreSavedTo + this.CurrentSubPath, AlertType.Info);
