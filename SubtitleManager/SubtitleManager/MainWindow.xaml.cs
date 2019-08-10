@@ -164,10 +164,10 @@ namespace SubtitleManager
             {
                 if (myMatch.Success)
                 {
-                    int order = int.Parse(myMatch.Groups["Order"].Value);
-                    string startTime = myMatch.Groups["StartTime"].Value;
-                    string endTime = myMatch.Groups["EndTime"].Value;
-                    string subtitleText = myMatch.Groups["Sub"].Value;
+                    int order = int.Parse(myMatch.Groups[RegexGroups.Order].Value);
+                    string startTime = myMatch.Groups[RegexGroups.StartTime].Value;
+                    string endTime = myMatch.Groups[RegexGroups.EndTime].Value;
+                    string subtitleText = myMatch.Groups[RegexGroups.Sub].Value;
 
                     srtList.Add(SubRip.Parse(order, startTime, endTime, subtitleText));
                 }

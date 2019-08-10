@@ -2,7 +2,7 @@
 {
     public static class CustomString
     {
-        public static string NewLine = "\n";
-        public static string SubtitleTimelineSeperator = "-->";
+        public const string NewLine = "\n";
+        public const string SubtitleTimelineSeperator = "-->";
     }
 }

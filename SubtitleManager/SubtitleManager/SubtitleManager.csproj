@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CustomStuff\RegexGroups.cs" />
     <Compile Include="SubtitleTypes\Aegisub.cs" />
     <Compile Include="Services\Alert.cs" />
     <Compile Include="CustomStuff\CustomExtension.cs" />
