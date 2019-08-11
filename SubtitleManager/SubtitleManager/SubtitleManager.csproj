@@ -56,6 +56,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="CustomStuff\RegexGroups.cs" />
+    <Compile Include="CustomStuff\RegexMatches.cs" />
     <Compile Include="SubtitleTypes\Aegisub.cs" />
     <Compile Include="Services\Alert.cs" />
     <Compile Include="CustomStuff\CustomExtension.cs" />
@@ -64,7 +65,7 @@
     <Compile Include="CustomStuff\CustomPaths.cs" />
     <Compile Include="CustomStuff\CustomString.cs" />
     <Compile Include="Services\FileManager.cs" />
-    <Compile Include="SubtitleTypes\Srt.cs" />
+    <Compile Include="SubtitleTypes\SubRip.cs" />
     <Compile Include="SubtitleTypes\SubtitleType.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

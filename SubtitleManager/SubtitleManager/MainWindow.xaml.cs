@@ -155,8 +155,7 @@ namespace SubtitleManager
 
         private SubRip[] ParseSrt(string srtRawText)
         {
-            string strRegex = @"(?<Order>\d+)\r\n(?<StartTime>(\d\d:){2}\d\d,\d{3}) --> (?<EndTime>(\d\d:){2}\d\d,\d{3})\r\n(?<Sub>.+)(?=\r\n\r\n\d+|$)";
-            var myRegex = new Regex(strRegex, RegexOptions.Multiline);
+            var myRegex = new Regex(RegexMatches.SubRipMatchRegex, RegexOptions.Multiline);
 
             var srtList = new List<SubRip>();
 
