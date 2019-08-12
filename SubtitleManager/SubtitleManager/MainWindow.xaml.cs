@@ -11,9 +11,6 @@ using SubtitleManager.SubtitleTypes;
 
 namespace SubtitleManager
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         private string FileData { get; set; }
@@ -23,10 +20,14 @@ namespace SubtitleManager
         private string CurrentSubPath { get; set; }
         private bool SubsAreLoaded { get; set; }
         private SubtitleType LoadedSubtitleType { get; set; }
+        private ConfigurationService ConfigurationService { get; set; }
 
         public MainWindow() 
         {
             this.InitializeComponent();
+            
+            this.ConfigurationService = new ConfigurationService();
+
             this.LoadLast();
         }
 
