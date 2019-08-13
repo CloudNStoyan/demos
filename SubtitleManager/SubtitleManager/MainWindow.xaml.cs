@@ -54,6 +54,7 @@ namespace SubtitleManager
             {
                 this.CurrentSubPath = dialog.FileName;
                 this.FileData = FileManager.ReadFileText(this.CurrentSubPath);
+                this.ConfigurationService.LastOpenedPath = this.CurrentSubPath;
 
                 switch (Path.GetExtension(this.CurrentSubPath))
                 {
@@ -132,7 +133,6 @@ namespace SubtitleManager
             {
                 this.SubRipSubs[this.CurrentSub].Text = this.SubtitleArea.Text;
                 var list = new List<string>();
-                Properties.Settings.Default["LastSubtitlePath"] = this.CurrentSubPath;
                 list.AddRange(this.SubRipSubs.Select(x => x.Order + Environment.NewLine + x.Text + Environment.NewLine + x.StartTime + CustomString.SubtitleTimelineSeperator + x.EndTime));
                 FileManager.WriteFileText(CustomPaths.Temp, list.ToArray());
             }
