@@ -37,6 +37,7 @@ namespace SubtitleManager
             {
                 this.FileData = FileManager.ReadFileText(CustomPaths.Temp);
                 this.CurrentSubPath = this.FileData.Split(new[] { Environment.NewLine }, StringSplitOptions.None).First();
+                this.ConfigurationService.LastOpenedPath = this.CurrentSubPath;
                 this.SubRipSubs = this.ParseSrt(this.FileData);
                 AlertService.Alert(CustomMessages.LoadedFromLastUse, AlertType.Info);
             }
