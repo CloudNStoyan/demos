@@ -65,8 +65,8 @@ namespace SubtitleManager
                         this.LoadedSubtitleType = SubtitleType.SubRip;
                         break;
                     case CustomExtension.Ass:
-                        this.Aegisubs = this.ParseAss(this.FileData.Split(new[] { CustomString.NewLine }, StringSplitOptions.None));
-                        this.SubCount.Text = this.Aegisubs.Length.ToString();
+                        this.Aegisubs = this.ParseAss(this.FileData);
+                        this.SubCount.Text = CustomMessages.Subcount + this.Aegisubs.Length;
                         this.LoadedSubtitleType = SubtitleType.Aegisub;
                         break;
                 }
@@ -177,9 +177,38 @@ namespace SubtitleManager
             return srtList.ToArray();
         }
 
-        private Aegisub[] ParseAss(string[] assTextLines)
+        private Aegisub[] ParseAss(string subtitleData)
         {
-            return new Aegisub[1];
+            string[] subtitleLines = subtitleData.Split(new[] {"\r\n"}, StringSplitOptions.None).Where(x => x.StartsWith("Dialogue:")).Select(x => x).ToArray();
+
+            var subs = new List<Aegisub>();
+
+            foreach (string subtitleLine in subtitleLines)
+            {
+                //Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+                string[] subtitleFormat = subtitleLine.Split(',');
+
+                if (subtitleFormat.Length == 10)
+                {
+                    var sub = new Aegisub
+                    {
+                        Layer = int.Parse(subtitleFormat[0]),
+                        Start = subtitleFormat[1],
+                        End = subtitleFormat[2],
+                        Style = subtitleFormat[3],
+                        Name = subtitleFormat[4],
+                        MarginL = subtitleFormat[5],
+                        MarginR = subtitleFormat[6],
+                        MarginV = subtitleFormat[7],
+                        Effect = subtitleFormat[8],
+                        Text = subtitleFormat[9]
+                    };
+
+                    subs.Add(sub);
+                }
+            }
+
+            return subs.ToArray();
         }
 
         private void DeleteTemp(object sender, RoutedEventArgs e)
