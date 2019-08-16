@@ -179,7 +179,7 @@ namespace SubtitleManager
 
         private Aegisub[] ParseAss(string subtitleData)
         {
-            string[] subtitleLines = subtitleData.Split(new[] {"\r\n"}, StringSplitOptions.None).Where(x => x.StartsWith("Dialogue:")).Select(x => x).ToArray();
+            string[] subtitleLines = subtitleData.Split(new[] { Environment.NewLine }, StringSplitOptions.None).Where(x => x.StartsWith(CustomString.AegisubDialog)).Select(x => x).ToArray();
 
             var subs = new List<Aegisub>();
 

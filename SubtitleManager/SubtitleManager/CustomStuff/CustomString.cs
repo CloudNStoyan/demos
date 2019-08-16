@@ -4,5 +4,6 @@
     {
         public const string NewLine = "\n";
         public const string SubtitleTimelineSeperator = "-->";
+        public const string AegisubDialog = "Dialogue:";
     }
 }
