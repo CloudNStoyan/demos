@@ -181,34 +181,23 @@ namespace SubtitleManager
         {
             string[] subtitleLines = subtitleData.Split(new[] { Environment.NewLine }, StringSplitOptions.None).Where(x => x.StartsWith(CustomString.AegisubDialog)).Select(x => x).ToArray();
 
-            var subs = new List<Aegisub>();
-
-            foreach (string subtitleLine in subtitleLines)
-            {
-                //Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
-                string[] subtitleFormat = subtitleLine.Split(',');
-
-                if (subtitleFormat.Length == 10)
+            return (from subtitleLine in subtitleLines
+                select subtitleLine.Split(',')
+                into subtitleFormat
+                where subtitleFormat.Length == 10
+                select new Aegisub
                 {
-                    var sub = new Aegisub
-                    {
-                        Layer = int.Parse(subtitleFormat[0]),
-                        Start = subtitleFormat[1],
-                        End = subtitleFormat[2],
-                        Style = subtitleFormat[3],
-                        Name = subtitleFormat[4],
-                        MarginL = subtitleFormat[5],
-                        MarginR = subtitleFormat[6],
-                        MarginV = subtitleFormat[7],
-                        Effect = subtitleFormat[8],
-                        Text = subtitleFormat[9]
-                    };
-
-                    subs.Add(sub);
-                }
-            }
-
-            return subs.ToArray();
+                    Layer = int.Parse(subtitleFormat[0]),
+                    Start = subtitleFormat[1],
+                    End = subtitleFormat[2],
+                    Style = subtitleFormat[3],
+                    Name = subtitleFormat[4],
+                    MarginL = subtitleFormat[5],
+                    MarginR = subtitleFormat[6],
+                    MarginV = subtitleFormat[7],
+                    Effect = subtitleFormat[8],
+                    Text = subtitleFormat[9]
+                }).ToArray();
         }
 
         private void DeleteTemp(object sender, RoutedEventArgs e)
