@@ -181,11 +181,8 @@ namespace SubtitleManager
         {
             string[] subtitleLines = subtitleData.Split(new[] { Environment.NewLine }, StringSplitOptions.None).Where(x => x.StartsWith(CustomString.AegisubDialog)).Select(x => x).ToArray();
 
-            return (from subtitleLine in subtitleLines
-                select subtitleLine.Split(',')
-                into subtitleFormat
-                where subtitleFormat.Length == 10
-                select new Aegisub
+            return subtitleLines.Where(subtitleFormat => subtitleFormat.Length == 10)
+                .Select(subtitleFormat => subtitleFormat.Split(',')).Select(subtitleFormat => new Aegisub
                 {
                     Layer = int.Parse(subtitleFormat[0]),
                     Start = subtitleFormat[1],
