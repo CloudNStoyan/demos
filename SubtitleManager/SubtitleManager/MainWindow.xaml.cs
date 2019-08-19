@@ -197,6 +197,13 @@ namespace SubtitleManager
                 }).ToArray();
         }
 
+        private SubViewer[] ParseSub(string subtitleData)
+        {
+            string[] subtitleLines = subtitleData.Split(new[] {Environment.NewLine}, StringSplitOptions.None);
+
+            return new SubViewer[1];
+        }
+
         private void DeleteTemp(object sender, RoutedEventArgs e)
         {
             FileManager.DeleteFile(CustomPaths.Temp);

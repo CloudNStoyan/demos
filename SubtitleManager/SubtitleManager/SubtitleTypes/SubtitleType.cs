@@ -3,7 +3,8 @@
     public enum SubtitleType
     {
         Aegisub,
-        SubRip
+        SubRip,
+        SubViewer
     }
 
     public enum SubtitleAction

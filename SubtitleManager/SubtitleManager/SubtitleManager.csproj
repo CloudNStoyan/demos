@@ -71,6 +71,7 @@
     <Compile Include="Services\FileManager.cs" />
     <Compile Include="SubtitleTypes\SubRip.cs" />
     <Compile Include="SubtitleTypes\SubtitleType.cs" />
+    <Compile Include="SubtitleTypes\SubViewer.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
