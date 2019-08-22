@@ -199,7 +199,14 @@ namespace SubtitleManager
 
         private SubViewer[] ParseSub(string subtitleData)
         {
-            string[] subtitleLines = subtitleData.Split(new[] {Environment.NewLine}, StringSplitOptions.None);
+            var regex = new Regex(RegexMatches.SubViewerMatchRegex, RegexOptions.Multiline);
+
+            var subList = new List<SubViewer>();
+
+            foreach (Match match in regex.Matches(subtitleData))
+            {
+                string startTime = match.Groups[RegexGroups.StartTime].Value;
+            }
 
             return new SubViewer[1];
         }
