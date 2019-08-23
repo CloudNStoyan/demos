@@ -206,9 +206,18 @@ namespace SubtitleManager
             foreach (Match match in regex.Matches(subtitleData))
             {
                 string startTime = match.Groups[RegexGroups.StartTime].Value;
+                string endTime = match.Groups[RegexGroups.EndTime].Value;
+                string sub = match.Groups[RegexGroups.Sub].Value;
+
+                subList.Add(new SubViewer
+                {
+                    StartTime = startTime,
+                    EndTime = endTime,
+                    Text = sub
+                });
             }
 
-            return new SubViewer[1];
+            return subList.ToArray();
         }
 
         private void DeleteTemp(object sender, RoutedEventArgs e)
