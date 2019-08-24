@@ -16,6 +16,7 @@ namespace SubtitleManager
         private string FileData { get; set; }
         private SubRip[] SubRipSubs { get; set; }
         private Aegisub[] Aegisubs { get; set; }
+        private SubViewer[] SubViewerSubs { get; set; }
         private int CurrentSub { get; set; }
         private string CurrentSubPath { get; set; }
         private bool SubsAreLoaded { get; set; }
@@ -68,6 +69,11 @@ namespace SubtitleManager
                         this.Aegisubs = this.ParseAss(this.FileData);
                         this.SubCount.Text = CustomMessages.Subcount + this.Aegisubs.Length;
                         this.LoadedSubtitleType = SubtitleType.Aegisub;
+                        break;
+                    case CustomExtension.Sub:
+                        this.SubViewerSubs = this.ParseSub(this.FileData);
+                        this.SubCount.Text = CustomMessages.Subcount + this.SubViewerSubs.Length;
+                        this.LoadedSubtitleType = SubtitleType.SubViewer;
                         break;
                 }
 
