@@ -40,30 +40,36 @@ namespace SubtitleManager
                 this.CurrentSubPath = this.FileData.Split(new[] { Environment.NewLine }, StringSplitOptions.None).First();
                 this.ConfigurationService.LastOpenedPath = this.CurrentSubPath;
 
-                switch (Path.GetExtension(this.CurrentSubPath))
-                {
-                    case CustomExtension.Srt:
-                        this.SubRipSubs = this.ParseSrt(this.FileData);
-                        this.SubCount.Text = CustomMessages.Subcount + this.SubRipSubs.Length;
-                        this.LoadedSubtitleType = SubtitleType.SubRip;
-                        break;
-                    case CustomExtension.Ass:
-                        this.Aegisubs = this.ParseAss(this.FileData);
-                        this.SubCount.Text = CustomMessages.Subcount + this.Aegisubs.Length;
-                        this.LoadedSubtitleType = SubtitleType.Aegisub;
-                        break;
-                    case CustomExtension.Sub:
-                        this.SubViewerSubs = this.ParseSub(this.FileData);
-                        this.SubCount.Text = CustomMessages.Subcount + this.SubViewerSubs.Length;
-                        this.LoadedSubtitleType = SubtitleType.SubViewer;
-                        break;
-                }
+                this.LoadSubs();
 
-                this.FillSub();
-                this.SubsAreLoaded = true;
-                this.CurrentSub = 0;
                 AlertService.Alert(CustomMessages.LoadedFromLastUse, AlertType.Info);
             }
+        }
+
+        private void LoadSubs()
+        {
+            switch (Path.GetExtension(this.CurrentSubPath))
+            {
+                case CustomExtension.Srt:
+                    this.SubRipSubs = this.ParseSrt(this.FileData);
+                    this.SubCount.Text = CustomMessages.Subcount + this.SubRipSubs.Length;
+                    this.LoadedSubtitleType = SubtitleType.SubRip;
+                    break;
+                case CustomExtension.Ass:
+                    this.Aegisubs = this.ParseAss(this.FileData);
+                    this.SubCount.Text = CustomMessages.Subcount + this.Aegisubs.Length;
+                    this.LoadedSubtitleType = SubtitleType.Aegisub;
+                    break;
+                case CustomExtension.Sub:
+                    this.SubViewerSubs = this.ParseSub(this.FileData);
+                    this.SubCount.Text = CustomMessages.Subcount + this.SubViewerSubs.Length;
+                    this.LoadedSubtitleType = SubtitleType.SubViewer;
+                    break;
+            }
+
+            this.FillSub();
+            this.SubsAreLoaded = true;
+            this.CurrentSub = 0;
         }
 
         private void BrowseSubs(object sender, EventArgs e)
@@ -80,28 +86,7 @@ namespace SubtitleManager
                 this.FileData = FileManager.ReadFileText(this.CurrentSubPath);
                 this.ConfigurationService.LastOpenedPath = this.CurrentSubPath;
 
-                switch (Path.GetExtension(this.CurrentSubPath))
-                {
-                    case CustomExtension.Srt:
-                        this.SubRipSubs = this.ParseSrt(this.FileData);
-                        this.SubCount.Text = CustomMessages.Subcount + this.SubRipSubs.Length;
-                        this.LoadedSubtitleType = SubtitleType.SubRip;
-                        break;
-                    case CustomExtension.Ass:
-                        this.Aegisubs = this.ParseAss(this.FileData);
-                        this.SubCount.Text = CustomMessages.Subcount + this.Aegisubs.Length;
-                        this.LoadedSubtitleType = SubtitleType.Aegisub;
-                        break;
-                    case CustomExtension.Sub:
-                        this.SubViewerSubs = this.ParseSub(this.FileData);
-                        this.SubCount.Text = CustomMessages.Subcount + this.SubViewerSubs.Length;
-                        this.LoadedSubtitleType = SubtitleType.SubViewer;
-                        break;
-                }
-
-                this.FillSub();
-                this.SubsAreLoaded = true;
-                this.CurrentSub = 0;
+                this.LoadSubs();
             }
             else
             {
