@@ -36,9 +36,7 @@ namespace SubtitleManager
         {
             if (File.Exists(CustomPaths.Temp))
             {
-                this.FileData = FileManager.ReadFileText(CustomPaths.Temp);
                 this.CurrentSubPath = this.FileData.Split(new[] { Environment.NewLine }, StringSplitOptions.None).First();
-                this.ConfigurationService.LastOpenedPath = this.CurrentSubPath;
 
                 this.LoadSubs();
 
@@ -48,6 +46,8 @@ namespace SubtitleManager
 
         private void LoadSubs()
         {
+            this.FileData = FileManager.ReadFileText(this.CurrentSubPath);
+            this.ConfigurationService.LastOpenedPath = this.CurrentSubPath;
             switch (Path.GetExtension(this.CurrentSubPath))
             {
                 case CustomExtension.Srt:
@@ -83,8 +83,6 @@ namespace SubtitleManager
             if (dialog.ShowDialog() == true)
             {
                 this.CurrentSubPath = dialog.FileName;
-                this.FileData = FileManager.ReadFileText(this.CurrentSubPath);
-                this.ConfigurationService.LastOpenedPath = this.CurrentSubPath;
 
                 this.LoadSubs();
             }
