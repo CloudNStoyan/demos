@@ -36,16 +36,15 @@ namespace SubtitleManager
         {
             if (File.Exists(CustomPaths.Temp))
             {
-                this.CurrentSubPath = this.FileData.Split(new[] { Environment.NewLine }, StringSplitOptions.None).First();
-
-                this.LoadSubs();
+                this.LoadSubs(this.FileData.Split(new[] { Environment.NewLine }, StringSplitOptions.None).First());
 
                 AlertService.Alert(CustomMessages.LoadedFromLastUse, AlertType.Info);
             }
         }
 
-        private void LoadSubs()
+        private void LoadSubs(string fileName)
         {
+            this.CurrentSubPath = fileName;
             this.FileData = FileManager.ReadFileText(this.CurrentSubPath);
             this.ConfigurationService.LastOpenedPath = this.CurrentSubPath;
             switch (Path.GetExtension(this.CurrentSubPath))
@@ -82,9 +81,7 @@ namespace SubtitleManager
 
             if (dialog.ShowDialog() == true)
             {
-                this.CurrentSubPath = dialog.FileName;
-
-                this.LoadSubs();
+                this.LoadSubs(dialog.FileName);
             }
             else
             {
