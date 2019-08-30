@@ -154,7 +154,6 @@ namespace SubtitleManager
                 string subs = string.Join(Environment.NewLine,
                     this.SubRipSubs.Select(x => x.Order + Environment.NewLine + x.Text + Environment.NewLine + x.StartTime + CustomString.SubtitleTimelineSeperator + x.EndTime + Environment.NewLine).ToArray());
                 FileManager.WriteFileText(this.CurrentSubPath, subs);
-                FileManager.DeleteFile(CustomPaths.Temp);
                 AlertService.Alert(this.LoadedSubtitleType + CustomMessages.SubsAreSavedTo + this.CurrentSubPath, AlertType.Info);
             }
             else
