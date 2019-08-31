@@ -36,9 +36,12 @@ namespace SubtitleManager
         {
             if (File.Exists(CustomPaths.Temp))
             {
-                this.LoadSubs(this.FileData.Split(new[] { Environment.NewLine }, StringSplitOptions.None).First());
+                if (!string.IsNullOrWhiteSpace(this.FileData))
+                {
+                    this.LoadSubs(this.FileData.Split(new[] { Environment.NewLine }, StringSplitOptions.None).First());
 
-                AlertService.Alert(CustomMessages.LoadedFromLastUse, AlertType.Info);
+                    AlertService.Alert(CustomMessages.LoadedFromLastUse, AlertType.Info);
+                }
             }
         }
 
