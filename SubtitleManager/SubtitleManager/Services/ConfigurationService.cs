@@ -10,13 +10,11 @@ namespace SubtitleManager.Services
 
         public ConfigurationService()
         {
-            string json = string.Empty;
             if (File.Exists(ConfigFilePath))
             {
-                json = File.ReadAllText(ConfigFilePath);
+                string json = File.ReadAllText(ConfigFilePath);
+                this.ConfigData = JsonConvert.DeserializeObject<ConfigData>(json);
             }
-
-            this.ConfigData = JsonConvert.DeserializeObject<ConfigData>(json);
         }
 
         public string LastOpenedPath
