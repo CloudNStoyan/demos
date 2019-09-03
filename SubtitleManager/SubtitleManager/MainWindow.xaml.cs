@@ -38,14 +38,12 @@ namespace SubtitleManager
             {
                 if (!string.IsNullOrWhiteSpace(this.FileData))
                 {
-                    this.LoadSubs(this.FileData.Split(new[] { Environment.NewLine }, StringSplitOptions.None).First());
-
-                    AlertService.Alert(CustomMessages.LoadedFromLastUse, AlertType.Info);
+                    this.LoadSubs(this.FileData.Split(new[] { Environment.NewLine }, StringSplitOptions.None).First(), CustomMessages.LoadedFromLastUse, AlertType.Info);
                 }
             }
         }
 
-        private void LoadSubs(string fileName)
+        private void LoadSubs(string fileName, string messageAfterLoadedSubs, AlertType alertType)
         {
             this.CurrentSubPath = fileName;
             this.FileData = FileManager.ReadFileText(this.CurrentSubPath);
@@ -72,6 +70,7 @@ namespace SubtitleManager
             this.FillSub();
             this.SubsAreLoaded = true;
             this.CurrentSub = 0;
+            AlertService.Alert(messageAfterLoadedSubs, alertType);
         }
 
         private void BrowseSubs(object sender, EventArgs e)
@@ -84,7 +83,7 @@ namespace SubtitleManager
 
             if (dialog.ShowDialog() == true)
             {
-                this.LoadSubs(dialog.FileName);
+                this.LoadSubs(dialog.FileName, "Subs are loaded", AlertType.Info);
             }
             else
             {
