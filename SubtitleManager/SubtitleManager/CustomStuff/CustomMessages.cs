@@ -11,5 +11,6 @@
         public const string EndTime = "EndTime is: ";
         public const string Order = "Order is: ";
         public const string Subcount = "Sub count is: ";
+        public const string SubsAreLoaded = "Subs are loaded";
     }
 }

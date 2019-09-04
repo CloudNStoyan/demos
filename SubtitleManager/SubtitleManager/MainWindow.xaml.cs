@@ -83,7 +83,7 @@ namespace SubtitleManager
 
             if (dialog.ShowDialog() == true)
             {
-                this.LoadSubs(dialog.FileName, "Subs are loaded", AlertType.Info);
+                this.LoadSubs(dialog.FileName, CustomMessages.SubsAreLoaded, AlertType.Info);
             }
             else
             {
