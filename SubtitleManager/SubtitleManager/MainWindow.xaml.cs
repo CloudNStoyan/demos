@@ -131,10 +131,15 @@ namespace SubtitleManager
         {
             if (this.LoadedSubtitleType == SubtitleType.SubRip)
             {
-                this.SubtitleArea.Text = this.SubRipSubs[this.CurrentSub].Text;
-                this.StartTime.Text = CustomMessages.StartTime + this.SubRipSubs[this.CurrentSub].StartTime;
-                this.EndTime.Text = CustomMessages.EndTime + this.SubRipSubs[this.CurrentSub].EndTime;
-                this.Order.Text = CustomMessages.Order + this.SubRipSubs[this.CurrentSub].Order;
+                switch (this.LoadedSubtitleType)
+                {
+                    case SubtitleType.SubRip:
+                        this.SubtitleArea.Text = this.SubRipSubs[this.CurrentSub].Text;
+                        this.StartTime.Text = CustomMessages.StartTime + this.SubRipSubs[this.CurrentSub].StartTime;
+                        this.EndTime.Text = CustomMessages.EndTime + this.SubRipSubs[this.CurrentSub].EndTime;
+                        this.Order.Text = CustomMessages.Order + this.SubRipSubs[this.CurrentSub].Order;
+                        break;
+                }
             }
         }
 
