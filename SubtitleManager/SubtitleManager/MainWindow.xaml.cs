@@ -134,10 +134,18 @@ namespace SubtitleManager
                 switch (this.LoadedSubtitleType)
                 {
                     case SubtitleType.SubRip:
-                        this.SubtitleArea.Text = this.SubRipSubs[this.CurrentSub].Text;
-                        this.StartTime.Text = CustomMessages.StartTime + this.SubRipSubs[this.CurrentSub].StartTime;
-                        this.EndTime.Text = CustomMessages.EndTime + this.SubRipSubs[this.CurrentSub].EndTime;
-                        this.Order.Text = CustomMessages.Order + this.SubRipSubs[this.CurrentSub].Order;
+                        var subRipSub = this.SubRipSubs[this.CurrentSub];
+                        this.SubtitleArea.Text = subRipSub.Text;
+                        this.StartTime.Text = CustomMessages.StartTime + subRipSub.StartTime;
+                        this.EndTime.Text = CustomMessages.EndTime + subRipSub.EndTime;
+                        this.Order.Text = CustomMessages.Order + subRipSub.Order;
+                        break;
+                    case SubtitleType.Aegisub:
+                        var aegisub = this.Aegisubs[this.CurrentSub];
+                        this.SubtitleArea.Text = aegisub.Text;
+                        this.StartTime.Text = aegisub.Start;
+                        this.EndTime.Text = aegisub.End;
+                        this.Order.Text = "No order";
                         break;
                 }
             }
