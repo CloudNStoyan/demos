@@ -147,6 +147,13 @@ namespace SubtitleManager
                         this.EndTime.Text = aegisub.End;
                         this.Order.Text = "No order";
                         break;
+                    case SubtitleType.SubViewer:
+                        var subViewer = this.SubViewerSubs[this.CurrentSub];
+                        this.SubtitleArea.Text = subViewer.Text;
+                        this.StartTime.Text = subViewer.StartTime;
+                        this.EndTime.Text = subViewer.EndTime;
+                        this.Order.Text = "No order";
+                        break;
                 }
             }
         }
