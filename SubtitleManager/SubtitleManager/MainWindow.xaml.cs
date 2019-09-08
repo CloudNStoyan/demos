@@ -143,16 +143,16 @@ namespace SubtitleManager
                     case SubtitleType.Aegisub:
                         var aegisub = this.Aegisubs[this.CurrentSub];
                         this.SubtitleArea.Text = aegisub.Text;
-                        this.StartTime.Text = aegisub.Start;
-                        this.EndTime.Text = aegisub.End;
-                        this.Order.Text = "No order";
+                        this.StartTime.Text = CustomMessages.StartTime + aegisub.Start;
+                        this.EndTime.Text = CustomMessages.EndTime + aegisub.End;
+                        this.Order.Text = CustomMessages.NoOrder;
                         break;
                     case SubtitleType.SubViewer:
                         var subViewer = this.SubViewerSubs[this.CurrentSub];
                         this.SubtitleArea.Text = subViewer.Text;
-                        this.StartTime.Text = subViewer.StartTime;
-                        this.EndTime.Text = subViewer.EndTime;
-                        this.Order.Text = "No order";
+                        this.StartTime.Text = CustomMessages.StartTime + subViewer.StartTime;
+                        this.EndTime.Text = CustomMessages.EndTime + subViewer.EndTime;
+                        this.Order.Text = CustomMessages.NoOrder;
                         break;
                 }
             }

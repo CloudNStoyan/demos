@@ -12,5 +12,6 @@
         public const string Order = "Order is: ";
         public const string Subcount = "Sub count is: ";
         public const string SubsAreLoaded = "Subs are loaded";
+        public const string NoOrder = "This format doesn't support order!";
     }
 }
