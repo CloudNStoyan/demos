@@ -129,32 +129,32 @@ namespace SubtitleManager
 
         private void FillSub()
         {
-            if (this.LoadedSubtitleType == SubtitleType.SubRip)
+            switch (this.LoadedSubtitleType)
             {
-                switch (this.LoadedSubtitleType)
-                {
-                    case SubtitleType.SubRip:
-                        var subRipSub = this.SubRipSubs[this.CurrentSub];
-                        this.SubtitleArea.Text = subRipSub.Text;
-                        this.StartTime.Text = CustomMessages.StartTime + subRipSub.StartTime;
-                        this.EndTime.Text = CustomMessages.EndTime + subRipSub.EndTime;
-                        this.Order.Text = CustomMessages.Order + subRipSub.Order;
-                        break;
-                    case SubtitleType.Aegisub:
-                        var aegisub = this.Aegisubs[this.CurrentSub];
-                        this.SubtitleArea.Text = aegisub.Text;
-                        this.StartTime.Text = CustomMessages.StartTime + aegisub.Start;
-                        this.EndTime.Text = CustomMessages.EndTime + aegisub.End;
-                        this.Order.Text = CustomMessages.NoOrder;
-                        break;
-                    case SubtitleType.SubViewer:
-                        var subViewer = this.SubViewerSubs[this.CurrentSub];
-                        this.SubtitleArea.Text = subViewer.Text;
-                        this.StartTime.Text = CustomMessages.StartTime + subViewer.StartTime;
-                        this.EndTime.Text = CustomMessages.EndTime + subViewer.EndTime;
-                        this.Order.Text = CustomMessages.NoOrder;
-                        break;
-                }
+                case SubtitleType.SubRip:
+                    var subRipSub = this.SubRipSubs[this.CurrentSub];
+                    this.SubtitleArea.Text = subRipSub.Text;
+                    this.StartTime.Text = CustomMessages.StartTime + subRipSub.StartTime;
+                    this.EndTime.Text = CustomMessages.EndTime + subRipSub.EndTime;
+                    this.Order.Text = CustomMessages.Order + subRipSub.Order;
+                    break;
+                case SubtitleType.Aegisub:
+                    var aegisub = this.Aegisubs[this.CurrentSub];
+                    this.SubtitleArea.Text = aegisub.Text;
+                    this.StartTime.Text = CustomMessages.StartTime + aegisub.Start;
+                    this.EndTime.Text = CustomMessages.EndTime + aegisub.End;
+                    this.Order.Text = CustomMessages.NoOrder;
+                    break;
+                case SubtitleType.SubViewer:
+                    var subViewer = this.SubViewerSubs[this.CurrentSub];
+                    this.SubtitleArea.Text = subViewer.Text;
+                    this.StartTime.Text = CustomMessages.StartTime + subViewer.StartTime;
+                    this.EndTime.Text = CustomMessages.EndTime + subViewer.EndTime;
+                    this.Order.Text = CustomMessages.NoOrder;
+                    break;
+                default:
+                    this.SubtitleArea.Text = "No subs recognized!";
+                    break;
             }
         }
 
