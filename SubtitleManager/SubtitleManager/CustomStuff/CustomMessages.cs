@@ -13,5 +13,8 @@
         public const string Subcount = "Sub count is: ";
         public const string SubsAreLoaded = "Subs are loaded";
         public const string NoOrder = "This format doesn't support order!";
+        public const string NoSubsRecognzied = "No subs recognized!";
+        public const string NoStartTime = "This format doesn't support start time!";
+        public const string NoEndTime = "This format doesn't support end time!";
     }
 }

@@ -153,7 +153,10 @@ namespace SubtitleManager
                     this.Order.Text = CustomMessages.NoOrder;
                     break;
                 default:
-                    this.SubtitleArea.Text = "No subs recognized!";
+                    this.SubtitleArea.Text = CustomMessages.NoSubsRecognzied;
+                    this.StartTime.Text = CustomMessages.NoStartTime;
+                    this.EndTime.Text = CustomMessages.NoEndTime;
+                    this.Order.Text = CustomMessages.NoOrder;
                     break;
             }
         }
