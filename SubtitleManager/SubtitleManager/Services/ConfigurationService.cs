@@ -10,6 +10,7 @@ namespace SubtitleManager.Services
 
         public ConfigurationService()
         {
+            this.ConfigData = new ConfigData();
             if (File.Exists(ConfigFilePath))
             {
                 string json = File.ReadAllText(ConfigFilePath);
