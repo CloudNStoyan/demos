@@ -132,25 +132,34 @@ namespace SubtitleManager
             switch (this.LoadedSubtitleType)
             {
                 case SubtitleType.SubRip:
-                    var subRipSub = this.SubRipSubs[this.CurrentSub];
-                    this.SubtitleArea.Text = subRipSub.Text;
-                    this.StartTime.Text = CustomMessages.StartTime + subRipSub.StartTime;
-                    this.EndTime.Text = CustomMessages.EndTime + subRipSub.EndTime;
-                    this.Order.Text = CustomMessages.Order + subRipSub.Order;
+                    if (this.SubRipSubs != null && this.SubRipSubs.Length > 0)
+                    {
+                        var subRipSub = this.SubRipSubs[this.CurrentSub];
+                        this.SubtitleArea.Text = subRipSub.Text;
+                        this.StartTime.Text = CustomMessages.StartTime + subRipSub.StartTime;
+                        this.EndTime.Text = CustomMessages.EndTime + subRipSub.EndTime;
+                        this.Order.Text = CustomMessages.Order + subRipSub.Order;
+                    }
                     break;
                 case SubtitleType.Aegisub:
-                    var aegisub = this.Aegisubs[this.CurrentSub];
-                    this.SubtitleArea.Text = aegisub.Text;
-                    this.StartTime.Text = CustomMessages.StartTime + aegisub.Start;
-                    this.EndTime.Text = CustomMessages.EndTime + aegisub.End;
-                    this.Order.Text = CustomMessages.NoOrder;
+                    if (this.Aegisubs != null && this.Aegisubs.Length > 0)
+                    {
+                        var aegisub = this.Aegisubs[this.CurrentSub];
+                        this.SubtitleArea.Text = aegisub.Text;
+                        this.StartTime.Text = CustomMessages.StartTime + aegisub.Start;
+                        this.EndTime.Text = CustomMessages.EndTime + aegisub.End;
+                        this.Order.Text = CustomMessages.NoOrder;
+                    }
                     break;
                 case SubtitleType.SubViewer:
-                    var subViewer = this.SubViewerSubs[this.CurrentSub];
-                    this.SubtitleArea.Text = subViewer.Text;
-                    this.StartTime.Text = CustomMessages.StartTime + subViewer.StartTime;
-                    this.EndTime.Text = CustomMessages.EndTime + subViewer.EndTime;
-                    this.Order.Text = CustomMessages.NoOrder;
+                    if (this.SubViewerSubs != null && this.SubViewerSubs.Length > 0)
+                    {
+                        var subViewer = this.SubViewerSubs[this.CurrentSub];
+                        this.SubtitleArea.Text = subViewer.Text;
+                        this.StartTime.Text = CustomMessages.StartTime + subViewer.StartTime;
+                        this.EndTime.Text = CustomMessages.EndTime + subViewer.EndTime;
+                        this.Order.Text = CustomMessages.NoOrder;
+                    }
                     break;
                 default:
                     this.SubtitleArea.Text = CustomMessages.NoSubsRecognzied;
